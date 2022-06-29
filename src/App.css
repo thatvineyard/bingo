@@ -1,5 +1,13 @@
 .App {
   text-align: center;
+  background-color: #282c34;
+  min-height: 100vh;
+  font-size: calc(10px + 2vmin);
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  width: 100%;
 }
 
 .App-logo {
@@ -14,14 +22,8 @@
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  font-size: 10vmin;
 }
 
 .App-link {
@@ -32,7 +34,97 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
+}
+
+.grid {
+  display: grid;
+  width: 90vmin;
+  height: 90vmin;
+  grid-template-columns: repeat(var(--columns), 1fr);
+  gap: 3vmin;
+  grid-template-rows: repeat(var(--rows), 1fr);
+  margin-inline: auto;
+  align-items: stretch;
+  justify-items: stretch;
+  position: relative;
+  overflow: clip;
+}
+
+.square {
+  color: #282c34;
+  background-color: white;
+  position: relative;
+  font-size: 2.8vmin;
+  word-wrap: break-word;
+  overflow: hidden;
+}
+
+.square.clicked {
+  color: white;
+  background-color: #636a77;
+}
+
+.square p {
+  margin: 5px;
+  overflow: hidden;
+  user-select: none;
+}
+
+.square .id {
+  font-size: 1.8vmin;
+  color: #282c3466;
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+}
+
+.crossed {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  /* background-color: #fff4; */
+}
+
+.crossed.diagtotop {
+  background: 
+      linear-gradient(to top left,
+          rgba(0,0,0,0) 49%,
+          rgba(0,0,0,1) 49%,
+          rgba(0,0,0,1) 51%,
+          rgba(0,0,0,0) 51%)
+}
+.crossed.diagtobot {
+  background: 
+      linear-gradient(to bottom left,
+          rgba(0,0,0,0) 49%,
+          rgba(0,0,0,1) 49%,
+          rgba(0,0,0,1) 51%,
+          rgba(0,0,0,0) 51%)
+}
+.crossed.row {
+  --translate: 0;
+  transform: translateY(calc(90vmin * var(--translate)));
+  background: 
+      linear-gradient(to bottom,
+          rgba(0,0,0,0) 49%,
+          rgba(0,0,0,1) 49%,
+          rgba(0,0,0,1) 51%,
+          rgba(0,0,0,0) 51%)
+}
+.crossed.column {
+  --translate: 0;
+  transform: translateX(calc(90vmin * var(--translate)));
+  background: 
+      linear-gradient(to right,
+          rgba(0,0,0,0) 49%,
+          rgba(0,0,0,1) 49%,
+          rgba(0,0,0,1) 51%,
+          rgba(0,0,0,0) 51%)
 }
