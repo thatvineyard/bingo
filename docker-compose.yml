@@ -12,6 +12,8 @@ services:
       - BACKEND_HOSTNAME=${BACKEND_HOSTNAME}
       - BACKEND_PORT=${BACKEND_PORT}
     # command: sleep 100000
+    networks:
+      - jingo-net
   # backend:
   #   build:
   #     context: ${BACKEND_FOLDER}
