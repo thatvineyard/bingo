@@ -182,13 +182,31 @@ function Grid(props) {
   }
 
   const calcWin = () => {
+    const numOfDiagonals = Math.abs(rows - columns) + 1;
+    const diagonalLength = Math.min(columns, rows);
     let winCandidateColumns = Array(columns).fill(0);
     let winCandidateRows = Array(rows).fill(0);
+    let winCandidatesDiagonalBackward = Array(numOfDiagonals).fill(0);
+    let winCandidatesDiagonalForward = Array(numOfDiagonals).fill(0);
     clickedSquares.map((coordinate) => {
       const [row, column] = coordinate;
 
       winCandidateColumns[column]++;
       winCandidateRows[row]++;
+      if (isOnDiagonalForward(row, column)) {
+        if (rows > columns) {
+          winCandidatesDiagonalForward[row - (columns - column - 1)]++;
+        } else {
+          winCandidatesDiagonalForward[column]++;
+        }
+      }
+      if (isOnDiagonalBackward(row, column)) {
+        if (rows > columns) {
+          winCandidatesDiagonalBackward[row - column]++;
+        } else {
+          winCandidatesDiagonalBackward[column]++;
+        }
+      }
 
       // if (!winCandidatesRows.includes(row)) {
       //   setWinCandidatesRows((prevWinCandidateRows) => (prevWinCandidateRows.concat([row])))
@@ -203,8 +221,10 @@ function Grid(props) {
       //   setWinCandidatesDiagonalBackward((prevWinCandidateDiagonalBackward) => (prevWinCandidateDiagonalBackward.concat([row])))
       // }
     })
-    console.log("winCandidateRows")
-    console.log(winCandidateRows)
+    console.log("winCandidatesDiagonalBackward")
+    console.log(winCandidatesDiagonalBackward)
+    console.log("winCandidatesDiagonalForward")
+    console.log(winCandidatesDiagonalForward)
     setCompleteLines(() => {
       let completeLines = []
       winCandidateColumns.map((element, index) => {
@@ -217,22 +237,69 @@ function Grid(props) {
           completeLines.push({ direction: "row", index: index })
         }
       })
+      winCandidatesDiagonalForward.map((element, index) => {
+        if (element == diagonalLength) {
+          completeLines.push({ direction: "diagonalForward", index: index })
+        }
+      })
+      winCandidatesDiagonalBackward.map((element, index) => {
+        if (element == diagonalLength) {
+          completeLines.push({ direction: "diagonalBackward", index: index })
+        }
+      })
       return completeLines;
     })
   }
 
-  const calcBarOffset = (winningDirection, winningOffset) => {
+  const calcBarOffset = (dimension, winningDirection, winningOffset) => {
+    const numOfDiagonals = Math.abs(rows - columns) + 1;
     switch (winningDirection) {
       case "row":
-        return -(((rows-1)/2) - winningOffset) / rows
+        if (dimension == "Y") {
+          return -(((rows - 1) / 2) - winningOffset) / rows
+        } else {
+          return 0;
+        }
         break;
-        case "column":
-        return -(((columns-1)/2) - winningOffset) / columns
+      case "column":
+        if (dimension == "X") {
+          return -(((columns - 1) / 2) - winningOffset) / columns
+        } else {
+          return 0;
+        }
+        break;
+      case "diagonalForward":
+      case "diagonalBackward":
+        if (rows > columns) {
+          if (dimension == "Y") {
+            return (winningOffset-0.5) / (rows)
+          } else {
+            return 0;
+          }
+        } else {
+
+        }
         break;
       default:
         return 0;
         break;
     }
+  }
+  const calcBarScale = (winningDirection) => {
+    switch (winningDirection) {
+      case "diagonalForward":
+      case "diagonalBackward":
+        if (rows > columns) {
+          return `1, ${columns / rows}`
+        } else {
+          return `${rows / columns}, 1`
+        }
+        break;
+        deafult:
+        return "1";
+        break;
+    }
+
   }
   return (
     <>
@@ -255,13 +322,14 @@ function Grid(props) {
                 isOnDiagonalBackward={() => isOnDiagonalBackward(row, column)}
                 isCandidate={() => isCandidate(row, column)}
                 calcBarOffset={calcBarOffset}
+                calcBarScale={calcBarScale}
               />
             )
           )}
         </div>
         <div className="overlay">
           {completeLines.map((element) => (
-            <Bar winningDirection={element.direction} winningOffset={element.index} calcBarOffset={calcBarOffset} />
+            <Bar key={`${element.direction}${element.index}`} winningDirection={element.direction} winningOffset={element.index} calcBarOffset={calcBarOffset} calcBarScale={calcBarScale} />
           ))}
         </div>
       </div>
@@ -277,10 +345,9 @@ function Square(props) {
       onClick={props.onClick}
     >
       {/* <p>{props.getText()}</p> */}
-      <p>{`diagFowrd: ${props.isOnDiagonalForward() ? "✅" : "❌"}`}</p>
-      <p>{`diagBack: ${props.isOnDiagonalBackward() ? "✅" : "❌"}`}</p>
-      <p>{`row:${props.calcBarOffset("row", props.tmpRow)}`}</p>
-      <p>{`column:${props.calcBarOffset("column", props.tmpColumn)}`}</p>
+      <p>{`diagBackward: ${props.isOnDiagonalBackward() ? "✅" : "❌"}`}</p>
+      <p>{`${props.calcBarOffset("X", "diagonalBackward", props.column)}:${props.calcBarOffset("Y", "diagonalBackward", props.tmpRow)}`}</p>
+      {/* <p>{`diagBack: ${props.isOnDiagonalBackward() ? "✅" : "❌"} ${props.calcBarOffset("diagonalBackward", props.tmpColumn)}`}</p> */}
       <div className='id'>
         {props.idText}
       </div>
@@ -292,7 +359,11 @@ function Square(props) {
 function Bar(props) {
   return (
     <div className={`crossed ${props.winningDirection}`}
-      style={{ "--translate": props.calcBarOffset(props.winningDirection, props.winningOffset) }}
+      style={{
+        "--translateX": props.calcBarOffset("X", props.winningDirection, props.winningOffset),
+        "--translateY": props.calcBarOffset("Y", props.winningDirection, props.winningOffset),
+        "--scale": props.calcBarScale(props.winningDirection)
+      }}
     />
   )
 }
