@@ -88,7 +88,7 @@ function BingoLineOverlay(props) {
 
 function Bar(props) {
   return (
-    <div className={`crossed ${props.winningDirection}`}
+    <div className={`line ${props.winningDirection}`}
       style={{
         "--translateX": props.calcBarOffset("X", props.winningDirection, props.winningOffset),
         "--translateY": props.calcBarOffset("Y", props.winningDirection, props.winningOffset),

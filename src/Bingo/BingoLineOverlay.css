@@ -11,7 +11,7 @@
   pointer-events: none;
 }
 
-.crossed {
+.line {
   /* || Dimensions */
   /* || Positioning */
   position: absolute;
@@ -21,7 +21,7 @@
   /* || Utility */
 }
 
-.crossed.diagonalForward {
+.line.diagonalForward {
   /* || Dimensions */
   /* || Positioning */
   transform: translate(calc(90vmin * var(--translateX)), calc(90vmin * var(--translateY))) scale(var(--scale));
@@ -36,7 +36,7 @@
   /* || Utility */
 }
 
-.crossed.diagonalBackward {
+.line.diagonalBackward {
   /* || Dimensions */
   /* || Positioning */
   transform: translate(calc(90vmin * var(--translateX)), calc(90vmin * var(--translateY))) scale(var(--scale));
@@ -51,7 +51,7 @@
   /* || Utility */
 }
 
-.crossed.row {
+.line.row {
   /* || Dimensions */
   /* || Positioning */
   transform: translateY(calc(90vmin * var(--translateY)));
@@ -66,7 +66,7 @@
   /* || Utility */
 }
 
-.crossed.column {
+.line.column {
   /* || Dimensions */
   /* || Positioning */
   transform: translateX(calc(90vmin * var(--translateX)));

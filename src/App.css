@@ -4,9 +4,15 @@
   width: 100%;
   /* || Positioning */
   /* || Design */
-  color: white;
-  background-color: #282c34;
-  font-size: calc(10px + 2vmin);
+  --col-bg-pri: #282c34;
+  --col-bg-sec: #636a77;
+  --col-bg-ter: #8190ac;
+  --col-fg-pri: #d9dde4;
+  --col-fg-sec: #636a77; 
+  --col-fg-ter: #636a77;
+
+  color: var(--col-fg-pri);
+  background-color: var(--col-bg-pri);
   text-align: center;
   /* || Content */
   display: flex;

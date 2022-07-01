@@ -5,8 +5,8 @@
   /* || Positioning */
   position: relative;
   /* || Design */
-  color: #282c34;
-  background-color: white;
+  color: var(--col-bg-pri);
+  background-color: var(--col-fg-pri);
   font-size: 2.5vmin;
   word-wrap: break-word;
   /* || Content */
@@ -20,8 +20,8 @@
   /* || Dimensions */
   /* || Positioning */
   /* || Design */
-  color: white;
-  background-color: #636a77;
+  color: var(--col-fg-pri);
+  background-color: var(--col-fg-ter);
   /* || Content */
   /* || Utility */
 }
@@ -32,7 +32,7 @@
   /* || Design */
   border-style: solid;
   border-width: 5px;
-  border-color: lightgreen;
+  border-color: var(--col-fg-pri);
   /* || Content */
   /* || Utility */
 }
@@ -54,7 +54,8 @@
   bottom: 0px;
   right: 0px;
   /* || Design */
-  color: #282c3466;
+  color: var(--col-bg-ter);
+  opacity: 0.5;
   /* || Content */
   font-size: 1.8vmin;
   /* || Utility */
