@@ -58,7 +58,8 @@
   color: #282c34;
   background-color: white;
   position: relative;
-  font-size: 2.8vmin;
+  /* font-size: 2.8vmin; */
+  font-size: 2.0vmin;
   word-wrap: break-word;
   overflow: hidden;
 }
@@ -66,6 +67,11 @@
 .square.clicked {
   color: white;
   background-color: #636a77;
+}
+.square.candidate {
+  border-style: solid;
+  border-width: 5px;
+  border-color: lightgreen;
 }
 
 .square p {
