@@ -20,11 +20,6 @@ const kort1 = [
     "FINNEN KENNETH KOM PÅ BESÖK",
     "KORVEN BLEV OFRIVILLIGT GRATTIS",
   ], [
-    "BR WILHELMSSON SKREV NY MUSIK OCH TEXT",
-    "BÅDE STH OCH LCM BAR FEZ",
-    "FINNEN KENNETH KOM PÅ BESÖK",
-    "KORVEN BLEV OFRIVILLIGT GRATTIS",
-  ], [
     "MANLIGT BEHÄRSKAD GLÄDJE FANNS",
     "GOD MAT",
     "BRÄNN BRON SA TERSEN ",
@@ -85,7 +80,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        .
+        JINGO
       </header>
       <Grid card={kort1} />
     </div>
@@ -123,33 +118,6 @@ function Grid(props) {
     console.log("completeLines")
     console.log(completeLines)
   }, [completeLines])
-  const winningDirection = "column"
-  const winningOffset = 1
-
-  // Diag down (4, 4)        Diag up (4, 4)
-  // [x] [ ] [ ] [ ]         [ ] [ ] [ ] [ ]
-  // [ ] [ ] [ ] [ ]         [ ] [ ] [ ] [ ]
-  // [ ] [ ] [ ] [ ]         [ ] [ ] [ ] [ ]
-  // [ ] [ ] [ ] [ ]         [x] [ ] [ ] [ ]
-  //
-  // Diag down (5, 4)        Diag up (5, 4)
-  // [x] [ ] [ ] [ ]         [ ] [ ] [ ] [ ]
-  // [x] [ ] [ ] [ ]         [ ] [ ] [ ] [ ]
-  // [ ] [ ] [ ] [ ]         [ ] [ ] [ ] [ ]
-  // [ ] [ ] [ ] [ ]         [x] [ ] [ ] [ ]
-  // [ ] [ ] [ ] [ ]         [x] [ ] [ ] [ ]
-  // 
-  // Diag down (4, 5)        Diag up (4, 5)
-  // [x] [x] [ ] [ ] [ ]     [ ] [ ] [ ] [x] [x]
-  // [ ] [ ] [ ] [ ] [ ]     [ ] [ ] [ ] [ ] [ ]
-  // [ ] [ ] [ ] [ ] [ ]     [ ] [ ] [ ] [ ] [ ]
-  // [ ] [ ] [ ] [ ] [ ]     [ ] [ ] [ ] [ ] [ ]
-  // 
-  // Number that fits in a column:
-  //  - at least 1
-  //  - for each extra row more than columns then it's an extra
-  // 1 + max(0, 5-4)
-  //
 
   const isOnDiagonalForward = (row, column) => {
     const coordinateCalc = row - (columns - column - 1);
@@ -194,37 +162,20 @@ function Grid(props) {
       winCandidateColumns[column]++;
       winCandidateRows[row]++;
       if (isOnDiagonalForward(row, column)) {
-        if (rows > columns) {
+        if (rows >= columns) {
           winCandidatesDiagonalForward[row - (columns - column - 1)]++;
         } else {
-          winCandidatesDiagonalForward[column]++;
+          winCandidatesDiagonalForward[(columns - column - 1) - row]++;
         }
       }
       if (isOnDiagonalBackward(row, column)) {
-        if (rows > columns) {
+        if (rows >= columns) {
           winCandidatesDiagonalBackward[row - column]++;
         } else {
-          winCandidatesDiagonalBackward[column]++;
+          winCandidatesDiagonalBackward[column - row]++;
         }
       }
-
-      // if (!winCandidatesRows.includes(row)) {
-      //   setWinCandidatesRows((prevWinCandidateRows) => (prevWinCandidateRows.concat([row])))
-      // }
-      // if (!winCandidatesColumns.includes(column)) {
-      //   setWinCandidatesColumns((prevWinCandidateColumns) => (prevWinCandidateColumns.concat([column])))
-      // }
-      // if (isOnDiagonalForward(row, column) && !winCandidatesDiagonalForward.includes(row)) {
-      //   setWinCandidatesDiagonalForward((prevWinCandidateDiagonalForward) => (prevWinCandidateDiagonalForward.concat([row])))
-      // }
-      // if (isOnDiagonalBackward(row, column) && !winCandidatesDiagonalBackward.includes(row)) {
-      //   setWinCandidatesDiagonalBackward((prevWinCandidateDiagonalBackward) => (prevWinCandidateDiagonalBackward.concat([row])))
-      // }
     })
-    console.log("winCandidatesDiagonalBackward")
-    console.log(winCandidatesDiagonalBackward)
-    console.log("winCandidatesDiagonalForward")
-    console.log(winCandidatesDiagonalForward)
     setCompleteLines(() => {
       let completeLines = []
       winCandidateColumns.map((element, index) => {
@@ -269,15 +220,33 @@ function Grid(props) {
         }
         break;
       case "diagonalForward":
-      case "diagonalBackward":
         if (rows > columns) {
           if (dimension == "Y") {
-            return (winningOffset-0.5) / (rows)
+            return (winningOffset - 0.5) / rows
           } else {
             return 0;
           }
         } else {
-
+          if (dimension == "X") {
+            return -(winningOffset - 0.5) / columns
+          } else {
+            return 0;
+          }
+        }
+        break;
+      case "diagonalBackward":
+        if (rows > columns) {
+          if (dimension == "Y") {
+            return (winningOffset - 0.5) / rows
+          } else {
+            return 0;
+          }
+        } else {
+          if (dimension == "X") {
+            return (winningOffset - 0.5) / columns
+          } else {
+            return 0;
+          }
         }
         break;
       default:
@@ -303,7 +272,6 @@ function Grid(props) {
   }
   return (
     <>
-      <p>{`${rows - columns} ${columns - rows}`}</p>
       <div className="gameArea">
         <div className="grid" style={{ "--rows": rows, "--columns": columns }}>
           {[...Array(rows).keys()].map((row) =>
@@ -344,10 +312,7 @@ function Square(props) {
       className={`square ${props.getClicked() ? "clicked" : ""}`}
       onClick={props.onClick}
     >
-      {/* <p>{props.getText()}</p> */}
-      <p>{`diagBackward: ${props.isOnDiagonalBackward() ? "✅" : "❌"}`}</p>
-      <p>{`${props.calcBarOffset("X", "diagonalBackward", props.column)}:${props.calcBarOffset("Y", "diagonalBackward", props.tmpRow)}`}</p>
-      {/* <p>{`diagBack: ${props.isOnDiagonalBackward() ? "✅" : "❌"} ${props.calcBarOffset("diagonalBackward", props.tmpColumn)}`}</p> */}
+      <p>{props.getText()}</p>
       <div className='id'>
         {props.idText}
       </div>
