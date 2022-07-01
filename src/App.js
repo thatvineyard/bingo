@@ -8,6 +8,10 @@ const boards = require('./board-config.json');
 
 function App() {
   
+  //  
+  // userBoardConfig  
+  // Looks at the query parameter `board` and base64 decodes
+  // it and grabs the board config from the json file.
   const useBoardConfig = () => {
     const [boardId, setBoardId] = useState(null)
     
