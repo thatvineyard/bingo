@@ -126,38 +126,38 @@ function Grid(props) {
   const winningDirection = "column"
   const winningOffset = 1
 
-// Diag down (4, 4)        Diag up (4, 4)
-// [x] [ ] [ ] [ ]         [ ] [ ] [ ] [ ]
-// [ ] [ ] [ ] [ ]         [ ] [ ] [ ] [ ]
-// [ ] [ ] [ ] [ ]         [ ] [ ] [ ] [ ]
-// [ ] [ ] [ ] [ ]         [x] [ ] [ ] [ ]
-//
-// Diag down (5, 4)        Diag up (5, 4)
-// [x] [ ] [ ] [ ]         [ ] [ ] [ ] [ ]
-// [x] [ ] [ ] [ ]         [ ] [ ] [ ] [ ]
-// [ ] [ ] [ ] [ ]         [ ] [ ] [ ] [ ]
-// [ ] [ ] [ ] [ ]         [x] [ ] [ ] [ ]
-// [ ] [ ] [ ] [ ]         [x] [ ] [ ] [ ]
-// 
-// Diag down (4, 5)        Diag up (4, 5)
-// [x] [x] [ ] [ ] [ ]     [ ] [ ] [ ] [x] [x]
-// [ ] [ ] [ ] [ ] [ ]     [ ] [ ] [ ] [ ] [ ]
-// [ ] [ ] [ ] [ ] [ ]     [ ] [ ] [ ] [ ] [ ]
-// [ ] [ ] [ ] [ ] [ ]     [ ] [ ] [ ] [ ] [ ]
-// 
-// Number that fits in a column:
-//  - at least 1
-//  - for each extra row more than columns then it's an extra
-// 1 + max(0, 5-4)
-//
+  // Diag down (4, 4)        Diag up (4, 4)
+  // [x] [ ] [ ] [ ]         [ ] [ ] [ ] [ ]
+  // [ ] [ ] [ ] [ ]         [ ] [ ] [ ] [ ]
+  // [ ] [ ] [ ] [ ]         [ ] [ ] [ ] [ ]
+  // [ ] [ ] [ ] [ ]         [x] [ ] [ ] [ ]
+  //
+  // Diag down (5, 4)        Diag up (5, 4)
+  // [x] [ ] [ ] [ ]         [ ] [ ] [ ] [ ]
+  // [x] [ ] [ ] [ ]         [ ] [ ] [ ] [ ]
+  // [ ] [ ] [ ] [ ]         [ ] [ ] [ ] [ ]
+  // [ ] [ ] [ ] [ ]         [x] [ ] [ ] [ ]
+  // [ ] [ ] [ ] [ ]         [x] [ ] [ ] [ ]
+  // 
+  // Diag down (4, 5)        Diag up (4, 5)
+  // [x] [x] [ ] [ ] [ ]     [ ] [ ] [ ] [x] [x]
+  // [ ] [ ] [ ] [ ] [ ]     [ ] [ ] [ ] [ ] [ ]
+  // [ ] [ ] [ ] [ ] [ ]     [ ] [ ] [ ] [ ] [ ]
+  // [ ] [ ] [ ] [ ] [ ]     [ ] [ ] [ ] [ ] [ ]
+  // 
+  // Number that fits in a column:
+  //  - at least 1
+  //  - for each extra row more than columns then it's an extra
+  // 1 + max(0, 5-4)
+  //
 
   const isOnDiagonalForward = (row, column) => {
-    const coordinateCalc = row-(columns - column - 1);
-    const gridCalc = rows-columns;
+    const coordinateCalc = row - (columns - column - 1);
+    const gridCalc = rows - columns;
 
-    if(rows == columns) {
+    if (rows == columns) {
       return coordinateCalc == 0;
-    } else if(rows > columns) {
+    } else if (rows > columns) {
       return (coordinateCalc >= 0) && (coordinateCalc <= gridCalc)
     } else {
       return (coordinateCalc <= 0) && (coordinateCalc >= gridCalc)
@@ -165,12 +165,12 @@ function Grid(props) {
   }
 
   const isOnDiagonalBackward = (row, column) => {
-    const coordinateCalc = row-column;
-    const gridCalc = rows-columns;
+    const coordinateCalc = row - column;
+    const gridCalc = rows - columns;
 
-    if(rows == columns) {
+    if (rows == columns) {
       return coordinateCalc == 0;
-    } else if(rows > columns) {
+    } else if (rows > columns) {
       return (coordinateCalc >= 0) && (coordinateCalc <= gridCalc)
     } else {
       return (coordinateCalc <= 0) && (coordinateCalc >= gridCalc)
@@ -182,13 +182,13 @@ function Grid(props) {
   }
 
   const calcWin = () => {
-    let winCandidateRows = Array(rows).fill(0);
     let winCandidateColumns = Array(columns).fill(0);
+    let winCandidateRows = Array(rows).fill(0);
     clickedSquares.map((coordinate) => {
       const [row, column] = coordinate;
 
-      winCandidateRows[column]++;
-      winCandidateColumns[row]++;
+      winCandidateColumns[column]++;
+      winCandidateRows[row]++;
 
       // if (!winCandidatesRows.includes(row)) {
       //   setWinCandidatesRows((prevWinCandidateRows) => (prevWinCandidateRows.concat([row])))
@@ -203,16 +203,18 @@ function Grid(props) {
       //   setWinCandidatesDiagonalBackward((prevWinCandidateDiagonalBackward) => (prevWinCandidateDiagonalBackward.concat([row])))
       // }
     })
+    console.log("winCandidateRows")
+    console.log(winCandidateRows)
     setCompleteLines(() => {
       let completeLines = []
-      winCandidateRows.map((element, index) => {
-        if(element == rows) {
-          completeLines.push({direction: "row", index: index})
+      winCandidateColumns.map((element, index) => {
+        if (element == rows) {
+          completeLines.push({ direction: "column", index: index })
         }
       })
-      winCandidateColumns.map((element, index) => {
-        if(element == columns) {
-          completeLines.push({direction: "column", index: index})
+      winCandidateRows.map((element, index) => {
+        if (element == columns) {
+          completeLines.push({ direction: "row", index: index })
         }
       })
       return completeLines;
@@ -222,10 +224,10 @@ function Grid(props) {
   const calcBarOffset = (winningDirection, winningOffset) => {
     switch (winningDirection) {
       case "row":
-        return ((1 + rows % 2) * (winningOffset) / (rows * 2))
+        return -(((rows-1)/2) - winningOffset) / rows
         break;
-      case "column":
-        return ((1 + columns % 2) * ((winningOffset - (columns % 2))) / (columns * 2))
+        case "column":
+        return -(((columns-1)/2) - winningOffset) / columns
         break;
       default:
         return 0;
@@ -234,58 +236,64 @@ function Grid(props) {
   }
   return (
     <>
-      <p>{`${rows-columns} ${columns-rows}`}</p>
-      <div className="grid" style={{ "--rows": rows, "--columns": columns }}>
-        {[...Array(rows).keys()].map((row) =>
-          [...Array(columns).keys()].map((column) =>
-            <Square
-              key={`${row}-${column}`}
-              idText={`${row}-${column}`}
-              getText={() => getText(row, column)}
-              getClicked={() => getClicked(row, column)}
-              onClick={() => setClicked(row, column)}
-              tmpRow={row}
-              tmpColumn={column}
-              tmpRows={rows}
-              tmpColumns={columns}
-              isOnDiagonalForward={() => isOnDiagonalForward(row, column)}
-              isOnDiagonalBackward={() => isOnDiagonalBackward(row, column)}
-              isCandidate={() => isCandidate(row, column)}
-            />
-          )
-        )}
-        {completeLines.map((element) => (
-          <Bar winningDirection={element.direction} winningOffset={element.index} calcBarOffset={calcBarOffset}/>
-        ))}
+      <p>{`${rows - columns} ${columns - rows}`}</p>
+      <div className="gameArea">
+        <div className="grid" style={{ "--rows": rows, "--columns": columns }}>
+          {[...Array(rows).keys()].map((row) =>
+            [...Array(columns).keys()].map((column) =>
+              <Square
+                key={`${row}-${column}`}
+                idText={`${row}-${column}`}
+                getText={() => getText(row, column)}
+                getClicked={() => getClicked(row, column)}
+                onClick={() => setClicked(row, column)}
+                tmpRow={row}
+                tmpColumn={column}
+                tmpRows={rows}
+                tmpColumns={columns}
+                isOnDiagonalForward={() => isOnDiagonalForward(row, column)}
+                isOnDiagonalBackward={() => isOnDiagonalBackward(row, column)}
+                isCandidate={() => isCandidate(row, column)}
+                calcBarOffset={calcBarOffset}
+              />
+            )
+          )}
+        </div>
+        <div className="overlay">
+          {completeLines.map((element) => (
+            <Bar winningDirection={element.direction} winningOffset={element.index} calcBarOffset={calcBarOffset} />
+          ))}
+        </div>
       </div>
     </>
   )
 }
 
-function Bar(props) {
-  return (
-    <div className={`crossed ${props.winningDirection}`}
-    style={{ "--translate": props.calcBarOffset(props.winningDirection, props.winningOffset)}}
-    />
-  )
-}
 
 function Square(props) {
   return (
     <div
-      className={`square ${props.getClicked() ? "clicked" : ""} ${props.isCandidate() ? "candidate" : ""}`}
+      className={`square ${props.getClicked() ? "clicked" : ""}`}
       onClick={props.onClick}
     >
       {/* <p>{props.getText()}</p> */}
-      <p>{`${props.tmpRow} ${props.tmpColumn}`}</p>
-      <p>{`${props.tmpRow-props.tmpColumn} / ${props.tmpColumn-props.tmpRow}`}</p>
-      <p>{`${(props.tmpRow)-(props.tmpColumns - props.tmpColumn - 1)} / ${(props.tmpColumns - props.tmpColumn - 1)-(props.tmpRow)}`}</p>
       <p>{`diagFowrd: ${props.isOnDiagonalForward() ? "✅" : "❌"}`}</p>
       <p>{`diagBack: ${props.isOnDiagonalBackward() ? "✅" : "❌"}`}</p>
+      <p>{`row:${props.calcBarOffset("row", props.tmpRow)}`}</p>
+      <p>{`column:${props.calcBarOffset("column", props.tmpColumn)}`}</p>
       <div className='id'>
         {props.idText}
       </div>
     </div >
+  )
+}
+
+
+function Bar(props) {
+  return (
+    <div className={`crossed ${props.winningDirection}`}
+      style={{ "--translate": props.calcBarOffset(props.winningDirection, props.winningOffset) }}
+    />
   )
 }
 
