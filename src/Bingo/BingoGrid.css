@@ -1,11 +1,19 @@
-.grid {
+/* || LAYOUT */
+
+.bingoGrid {
+  /* || Dimensions */
   height: 100%;
+  /* || Positioning */
+  position: relative;
+  /* || Design */
+  /* || Content */
   display: grid;
   grid-template-columns: repeat(var(--columns), 1fr);
-  gap: 3vmin;
   grid-template-rows: repeat(var(--rows), 1fr);
+  gap: 3vmin;
+  
   align-items: stretch;
   justify-items: stretch;
-  position: relative;
   overflow: clip;
+  /* || Utility */ 
 }

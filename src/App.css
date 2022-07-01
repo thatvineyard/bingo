@@ -1,16 +1,36 @@
 .App {
-  text-align: center;
-  background-color: #282c34;
+  /* || Dimensions */
   min-height: 100vh;
+  width: 100%;
+  /* || Positioning */
+  /* || Design */
+  color: white;
+  background-color: #282c34;
   font-size: calc(10px + 2vmin);
-  justify-content: center;
+  text-align: center;
+  /* || Content */
   display: flex;
   flex-direction: column;
-  color: white;
-  width: 100%;
+  justify-content: center;
+  /* || Utility */
 }
 
-.App .title {
+.App #title {
+  /* || Dimensions */
+  /* || Positioning */
+  /* || Design */
+  font-size: 20vmin;
+  /* || Content */
   align-items: center;
-  font-size: 10vmin;
+  /* || Utility */
+}
+
+.App #content {
+  /* || Dimensions */
+  width: 100%;
+  flex-grow: 1;
+  /* || Positioning */
+  /* || Design */
+  /* || Content */
+  /* || Utility */
 }

@@ -15,16 +15,11 @@ function calcDimensions(boardConfig) {
 }
 
 function Bingo(props) {
-
-  
   const getText = (row, column) => (props.boardConfig[row][column] || "Free Space")
-  
   const [rows, columns] = calcDimensions(props.boardConfig)
-
-
-
   const [clickedSquares, setClickedSquares] = useState([])
   const [completeLines, setCompleteLines] = useState([]);
+  
   const getClicked = (row, column) => (clickedSquares.find(e => e[0] === row && e[1] === column) ? true : false)
   const setClicked = (row, column) => {
     setClickedSquares((prevClickedSquares) => {
@@ -47,7 +42,7 @@ function Bingo(props) {
     } else {
       return (coordinateCalc <= 0) && (coordinateCalc >= gridCalc)
     }
-  },[rows, columns])
+  }, [rows, columns])
 
   const isOnDiagonalBackward = useCallback((row, column) => {
     const coordinateCalc = row - column;
@@ -60,7 +55,7 @@ function Bingo(props) {
     } else {
       return (coordinateCalc <= 0) && (coordinateCalc >= gridCalc)
     }
-  },[rows, columns])
+  }, [rows, columns])
 
 
   const calcWin = useCallback(() => {
@@ -115,7 +110,7 @@ function Bingo(props) {
       })
       return completeLines;
     })
-  },[rows, columns, clickedSquares, isOnDiagonalBackward, isOnDiagonalForward])
+  }, [rows, columns, clickedSquares, isOnDiagonalBackward, isOnDiagonalForward])
 
 
   useEffect(() => {
@@ -124,22 +119,22 @@ function Bingo(props) {
 
   // RETURN
   return (
-    <div className="gameArea">
-    <BingoGrid 
-      rows={rows} 
-      columns={columns}
-      getText={getText}
-      getClicked={getClicked}
-      setClicked={setClicked}
-      isOnDiagonalBackward={isOnDiagonalBackward}
-      isOnDiagonalForward={isOnDiagonalForward}
-    />
-    <BingoLineOverlay 
-      completeLines={completeLines}
-      columns={columns}
-      rows={rows}
-    />
-  </div>
+    <div className="bingoGameArea">
+      <BingoGrid
+        rows={rows}
+        columns={columns}
+        getText={getText}
+        getClicked={getClicked}
+        setClicked={setClicked}
+        isOnDiagonalBackward={isOnDiagonalBackward}
+        isOnDiagonalForward={isOnDiagonalForward}
+      />
+      <BingoLineOverlay
+        completeLines={completeLines}
+        columns={columns}
+        rows={rows}
+      />
+    </div>
   )
 }
 

@@ -1,33 +1,61 @@
+/* || DESIGN */
+
 .gameSquare {
+  /* || Dimensions */
+  /* || Positioning */
+  position: relative;
+  /* || Design */
   color: #282c34;
   background-color: white;
-  position: relative;
   font-size: 2.5vmin;
   word-wrap: break-word;
+  /* || Content */
   overflow: hidden;
+  /* || Utility */
   cursor: pointer;
   user-select: none;
 }
 
 .gameSquare.clicked {
+  /* || Dimensions */
+  /* || Positioning */
+  /* || Design */
   color: white;
   background-color: #636a77;
+  /* || Content */
+  /* || Utility */
 }
+
 .gameSquare.candidate {
+  /* || Dimensions */
+  /* || Positioning */
+  /* || Design */
   border-style: solid;
   border-width: 5px;
   border-color: lightgreen;
+  /* || Content */
+  /* || Utility */
 }
 
 .gameSquare p {
+  /* || Dimensions */
+  /* || Positioning */
   margin: 5px;
+  /* || Design */
+  /* || Content */
   overflow: hidden;
+  /* || Utility */
 }
 
 .gameSquare .id {
-  font-size: 1.8vmin;
-  color: #282c3466;
+  /* || Dimensions */
+  /* || Positioning */
   position: absolute;
   bottom: 0px;
   right: 0px;
+  /* || Design */
+  color: #282c3466;
+  /* || Content */
+  font-size: 1.8vmin;
+  /* || Utility */
 }

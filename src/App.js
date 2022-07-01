@@ -27,10 +27,12 @@ function App() {
     
   return (
     <div className="App">
-      <header className="title">
+      <header id="title">
         JINGO
       </header>
-      <Bingo boardConfig={useBoardConfig()} />
+      <div id="content">
+        <Bingo boardConfig={useBoardConfig()} />
+      </div>
     </div>
   );
 }

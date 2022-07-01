@@ -1,6 +1,13 @@
-.gameArea {
+.bingoGameArea {
+  /* || Dimensions */
   width: 85vmin;
   height: 85vmin;
-  margin-inline: auto;
+
+  /* || Positioning */
   position: relative;
+  margin-inline: auto;
+
+  /* || Design */
+  /* || Content */
+  /* || Utility */
 }

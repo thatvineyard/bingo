@@ -3,7 +3,7 @@ import './BingoGrid.css'
 
 function BingoGrid(props) {
   return (
-    <div className="grid" style={{ "--rows": props.rows, "--columns": props.columns }}>
+    <div className="bingoGrid" style={{ "--rows": props.rows, "--columns": props.columns }}>
       {[...Array(props.rows).keys()].map((row) =>
         [...Array(props.columns).keys()].map((column) =>
           <BingoSquare
