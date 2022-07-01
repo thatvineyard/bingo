@@ -27,30 +27,6 @@ const kort1 = [
   ],
 ]
 
-// const kort1 = [
-//   [
-//     "NÅGON FÖLL UNDER BORDET",
-//     "NÅGON SÖP PÅ GRANNENS FISK",
-//     "GUBBYOGA MED STRUMPOR OCH SANDALER",
-//     "VÄSTGÖTAKLIMAX VID STH - ENTRÉN",
-//   ], [
-//     "HALVAN KOM FÖRE TERSEN MED EFTER HELAN",
-//     "BR DUMANSKI SLOG BR WEIBORG PÅ KÄFTEN",
-//     "DALA SPELADE INTE PÅ SIN JÄTTETRUMPET",
-//     "KAPITELMEDALJEN BLEV OFFICIELL",
-//   ], [
-//     "BR WILHELMSSON SKREV NY MUSIK OCH TEXT",
-//     "BÅDE STH OCH LCM BAR FEZ",
-//     "FINNEN KENNETH KOM PÅ BESÖK",
-//     "KORVEN BLEV OFRIVILLIGT GRATTIS",
-//   ], [
-//     "MANLIGT BEHÄRSKAD GLÄDJE FANNS",
-//     "GOD MAT",
-//     "BRÄNN BRON SA TERSEN ",
-//     "BR KOUADRI BJÖD PÅ JÄTTEÄCKLIG SPRIT",
-//   ],
-// ]
-
 const kort2 = [
   [
     "KORVEN BLEV OFRIVILLIGT GRATTIS",
