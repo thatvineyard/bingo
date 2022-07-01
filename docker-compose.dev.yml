@@ -1,0 +1,10 @@
+version: '3.0'
+services:
+  jingo:
+    build:
+      context: .
+      target: builder
+    volumes:
+      - ./${FRONTEND_FOLDER}/src/:/app/src/
+    env_file:
+      - .env.dev

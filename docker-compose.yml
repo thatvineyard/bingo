@@ -3,30 +3,12 @@ services:
   jingo:
     build:
       context: .
-    volumes:
-      - ./${FRONTEND_FOLDER}/src/:/app/src/
     ports:
-      - ${FRONTEND_PORT}:3000
+      - ${FRONTEND_PORT_HOST}:${FRONTEND_PORT_CONTAINER}
     environment:
-      - WATCHPACK_POLLING=true
-      - BACKEND_HOSTNAME=${BACKEND_HOSTNAME}
-      - BACKEND_PORT=${BACKEND_PORT}
-    # command: sleep 100000
+      - WATCHPACK_POLLING
     networks:
       - jingo-net
-  # backend:
-  #   build:
-  #     context: ${BACKEND_FOLDER}
-  #   volumes:
-  #     - ./${BACKEND_FOLDER}/src/:/app/src/
-  #     - ./${BACKEND_FOLDER}/data/:/app/data/
-  #   ports:
-  #     - ${BACKEND_PORT}:5000
-  #   expose: 
-  #     - ${BACKEND_PORT}
-  #   hostname: ${BACKEND_HOSTNAME}
-  #   environment:
-  #     - FLASK_ENV=development
 
 networks:
   jingo-net:
