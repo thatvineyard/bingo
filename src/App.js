@@ -1,8 +1,6 @@
-import logo from './logo.svg';
 import './App.css';
 import { useCallback, useEffect, useState } from 'react';
 import React from 'react';
-import { click } from '@testing-library/user-event/dist/click';
 
 const boards = {
   board1: [ // Ym9hcmQx
@@ -93,7 +91,7 @@ function App() {
     const params = new URLSearchParams(window.location.search);
     setBoard(() => {
       try {
-        return atob(params.get("board"))
+        return window.atob(params.get("board"))
       } catch (err) {
         return ""
       }
@@ -103,10 +101,6 @@ function App() {
   const getBoard = (() => {
     return boards[board] || boards.default;
   })
-
-  useEffect(() => {
-    console.log(getBoard(board))
-  }, [board])
 
   return (
     <div className="App">
@@ -129,14 +123,14 @@ function calcDimensions(card) {
 
 function Grid(props) {
   const [rows, columns] = calcDimensions(props.card)
-  const getText = (row, column) => (props.card[row][column] || "Gratis Ruta")
+  const getText = (row, column) => (props.card[row][column] || "Free Space")
   const [clickedSquares, setClickedSquares] = useState([])
   const [completeLines, setCompleteLines] = useState([]);
-  const getClicked = (row, column) => (clickedSquares.find(e => e[0] == row && e[1] == column) ? true : false)
+  const getClicked = (row, column) => (clickedSquares.find(e => e[0] === row && e[1] === column) ? true : false)
   const setClicked = (row, column) => {
     setClickedSquares((prevClickedSquares) => {
       if (getClicked(row, column)) {
-        return prevClickedSquares.filter(e => (e[0] == row && e[1] == column) ? false : true)
+        return prevClickedSquares.filter(e => (e[0] === row && e[1] === column) ? false : true)
       } else {
         return prevClickedSquares.concat([[row, column]])
       }
@@ -147,8 +141,8 @@ function Grid(props) {
     const coordinateCalc = row - (columns - column - 1);
     const gridCalc = rows - columns;
 
-    if (rows == columns) {
-      return coordinateCalc == 0;
+    if (rows === columns) {
+      return coordinateCalc === 0;
     } else if (rows > columns) {
       return (coordinateCalc >= 0) && (coordinateCalc <= gridCalc)
     } else {
@@ -160,8 +154,8 @@ function Grid(props) {
     const coordinateCalc = row - column;
     const gridCalc = rows - columns;
 
-    if (rows == columns) {
-      return coordinateCalc == 0;
+    if (rows === columns) {
+      return coordinateCalc === 0;
     } else if (rows > columns) {
       return (coordinateCalc >= 0) && (coordinateCalc <= gridCalc)
     } else {
@@ -201,22 +195,22 @@ function Grid(props) {
     setCompleteLines(() => {
       let completeLines = []
       winCandidateColumns.map((element, index) => {
-        if (element == rows) {
+        if (element === rows) {
           completeLines.push({ direction: "column", index: index })
         }
       })
       winCandidateRows.map((element, index) => {
-        if (element == columns) {
+        if (element === columns) {
           completeLines.push({ direction: "row", index: index })
         }
       })
       winCandidatesDiagonalForward.map((element, index) => {
-        if (element == diagonalLength) {
+        if (element === diagonalLength) {
           completeLines.push({ direction: "diagonalForward", index: index })
         }
       })
       winCandidatesDiagonalBackward.map((element, index) => {
-        if (element == diagonalLength) {
+        if (element === diagonalLength) {
           completeLines.push({ direction: "diagonalBackward", index: index })
         }
       })
@@ -239,14 +233,14 @@ function Grid(props) {
     const numOfDiagonals = Math.abs(rows - columns) + 1;
     switch (winningDirection) {
       case "row":
-        if (dimension == "Y") {
+        if (dimension === "Y") {
           return -(((rows - 1) / 2) - winningOffset) / rows
         } else {
           return 0;
         }
         break;
       case "column":
-        if (dimension == "X") {
+        if (dimension === "X") {
           return -(((columns - 1) / 2) - winningOffset) / columns
         } else {
           return 0;
@@ -254,19 +248,19 @@ function Grid(props) {
         break;
       case "diagonalForward":
         if (rows > columns) {
-          if (dimension == "Y") {
+          if (dimension === "Y") {
             return (winningOffset - 0.5) / rows
           } else {
             return 0;
           }
         } else if (columns > rows) {
-          if (dimension == "X") {
+          if (dimension === "X") {
             return -(winningOffset - 0.5) / columns
           } else {
             return 0;
           }
         } else {
-          if (dimension == "X") {
+          if (dimension === "X") {
             return -(winningOffset) / columns
           } else {
             return 0;
@@ -275,19 +269,19 @@ function Grid(props) {
         break;
       case "diagonalBackward":
         if (rows > columns) {
-          if (dimension == "Y") {
+          if (dimension === "Y") {
             return (winningOffset - 0.5) / rows
           } else {
             return 0;
           }
         } else if (columns > rows) {
-          if (dimension == "X") {
+          if (dimension === "X") {
             return -(winningOffset - 0.5) / columns
           } else {
             return 0;
           }
         } else {
-          if (dimension == "X") {
+          if (dimension === "X") {
             return (winningOffset) / columns
           } else {
             return 0;
