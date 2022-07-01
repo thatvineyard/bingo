@@ -1,4 +1,5 @@
 import './App.css';
+import GameSquare from './GameSquare';
 import { useCallback, useEffect, useState } from 'react';
 import React from 'react';
 
@@ -307,7 +308,7 @@ function Grid(props) {
         <div className="grid" style={{ "--rows": rows, "--columns": columns }}>
           {[...Array(rows).keys()].map((row) =>
             [...Array(columns).keys()].map((column) =>
-              <Square
+              <GameSquare
                 key={`${row}-${column}`}
                 idText={`${row}-${column}`}
                 getText={() => getText(row, column)}
@@ -336,20 +337,6 @@ function Grid(props) {
   )
 }
 
-
-function Square(props) {
-  return (
-    <div
-      className={`square ${props.getClicked() ? "clicked" : ""}`}
-      onClick={props.onClick}
-    >
-      <p>{props.getText()}</p>
-      <div className='id'>
-        {props.idText}
-      </div>
-    </div >
-  )
-}
 
 
 function Bar(props) {

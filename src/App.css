@@ -70,40 +70,6 @@
   opacity: 0.5;
 }
 
-.square {
-  color: #282c34;
-  background-color: white;
-  position: relative;
-  font-size: 2.5vmin;
-  word-wrap: break-word;
-  overflow: hidden;
-  cursor: pointer;
-  user-select: none;
-}
-
-.square.clicked {
-  color: white;
-  background-color: #636a77;
-}
-.square.candidate {
-  border-style: solid;
-  border-width: 5px;
-  border-color: lightgreen;
-}
-
-.square p {
-  margin: 5px;
-  overflow: hidden;
-}
-
-.square .id {
-  font-size: 1.8vmin;
-  color: #282c3466;
-  position: absolute;
-  bottom: 0px;
-  right: 0px;
-}
-
 .crossed {
   pointer-events: none;
   position: absolute;
