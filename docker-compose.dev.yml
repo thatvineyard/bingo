@@ -10,3 +10,6 @@ services:
       - ${FRONTEND_PORT_HOST}:${FRONTEND_PORT_CONTAINER}
     env_file:
       - .env.dev
+
+# Command to run with this override:
+# docker-compose -f .\docker-compose.yml -f .\docker-compose.dev.yml --env-file=.env.dev build; docker-compose -f .\docker-compose.yml -f .\docker-compose.dev.yml --env-file=.env.dev up -d; docker-compose logs -f

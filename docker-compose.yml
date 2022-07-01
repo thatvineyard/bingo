@@ -13,3 +13,6 @@ services:
 networks:
   jingo-net:
     driver: bridge
+
+# Command to run:
+# docker-compose build; docker-compose up -d
