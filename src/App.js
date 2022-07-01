@@ -171,7 +171,7 @@ function Grid(props) {
     let winCandidateRows = Array(rows).fill(0);
     let winCandidatesDiagonalBackward = Array(numOfDiagonals).fill(0);
     let winCandidatesDiagonalForward = Array(numOfDiagonals).fill(0);
-    clickedSquares.map((coordinate) => {
+    clickedSquares.forEach((coordinate) => {
       const [row, column] = coordinate;
 
       winCandidateColumns[column]++;
@@ -194,22 +194,22 @@ function Grid(props) {
 
     setCompleteLines(() => {
       let completeLines = []
-      winCandidateColumns.map((element, index) => {
+      winCandidateColumns.forEach((element, index) => {
         if (element === rows) {
           completeLines.push({ direction: "column", index: index })
         }
       })
-      winCandidateRows.map((element, index) => {
+      winCandidateRows.forEach((element, index) => {
         if (element === columns) {
           completeLines.push({ direction: "row", index: index })
         }
       })
-      winCandidatesDiagonalForward.map((element, index) => {
+      winCandidatesDiagonalForward.forEach((element, index) => {
         if (element === diagonalLength) {
           completeLines.push({ direction: "diagonalForward", index: index })
         }
       })
-      winCandidatesDiagonalBackward.map((element, index) => {
+      winCandidatesDiagonalBackward.forEach((element, index) => {
         if (element === diagonalLength) {
           completeLines.push({ direction: "diagonalBackward", index: index })
         }
@@ -230,7 +230,6 @@ function Grid(props) {
 
 
   const calcBarOffset = (dimension, winningDirection, winningOffset) => {
-    const numOfDiagonals = Math.abs(rows - columns) + 1;
     switch (winningDirection) {
       case "row":
         if (dimension === "Y") {
@@ -238,14 +237,12 @@ function Grid(props) {
         } else {
           return 0;
         }
-        break;
       case "column":
         if (dimension === "X") {
           return -(((columns - 1) / 2) - winningOffset) / columns
         } else {
           return 0;
         }
-        break;
       case "diagonalForward":
         if (rows > columns) {
           if (dimension === "Y") {
@@ -266,7 +263,6 @@ function Grid(props) {
             return 0;
           }
         }
-        break;
       case "diagonalBackward":
         if (rows > columns) {
           if (dimension === "Y") {
@@ -287,10 +283,8 @@ function Grid(props) {
             return 0;
           }
         }
-        break;
       default:
         return 0;
-        break;
     }
   }
   const calcBarScale = (winningDirection) => {
@@ -302,10 +296,8 @@ function Grid(props) {
         } else {
           return `${rows / columns}, 1`
         }
-        break;
-        deafult:
+      default:
         return "1";
-        break;
     }
 
   }
