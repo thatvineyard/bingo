@@ -1,4 +1,5 @@
 import BingoSquare from './BingoSquare';
+import './BingoGrid.css'
 
 function BingoGrid(props) {
   return (

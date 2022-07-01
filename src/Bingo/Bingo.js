@@ -1,3 +1,4 @@
+import './Bingo.css';
 import BingoLineOverlay from './BingoLineOverlay';
 import BingoGrid from './BingoGrid';
 import { useCallback, useEffect, useState } from 'react';

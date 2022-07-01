@@ -1,0 +1,6 @@
+.gameArea {
+  width: 85vmin;
+  height: 85vmin;
+  margin-inline: auto;
+  position: relative;
+}

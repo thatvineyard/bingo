@@ -1,0 +1,11 @@
+.grid {
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(var(--columns), 1fr);
+  gap: 3vmin;
+  grid-template-rows: repeat(var(--rows), 1fr);
+  align-items: stretch;
+  justify-items: stretch;
+  position: relative;
+  overflow: clip;
+}
