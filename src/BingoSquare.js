@@ -1,5 +1,5 @@
 
-import './GameSquare.css'
+import './BingoSquare.css'
 
 function GameSquare(props) {
   return (
