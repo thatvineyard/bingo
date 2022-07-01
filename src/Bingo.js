@@ -4,9 +4,9 @@ import { useCallback, useEffect, useState } from 'react';
 import React from 'react';
 
 // Static functions
-function calcDimensions(card) {
-  let rows = card.length;
-  let columns = card.reduce(
+function calcDimensions(boardConfig) {
+  let rows = boardConfig.length;
+  let columns = boardConfig.reduce(
     (previousValue, currentValue) => Math.max(previousValue, currentValue.length),
     0
   );
@@ -16,9 +16,9 @@ function calcDimensions(card) {
 function Bingo(props) {
 
   
-  const getText = (row, column) => (props.card[row][column] || "Free Space")
+  const getText = (row, column) => (props.boardConfig[row][column] || "Free Space")
   
-  const [rows, columns] = calcDimensions(props.card)
+  const [rows, columns] = calcDimensions(props.boardConfig)
 
 
 

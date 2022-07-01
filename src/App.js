@@ -86,29 +86,30 @@ const boards = {
 }
 
 function App() {
-  const [board, setBoard] = useState(null)
-
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    setBoard(() => {
-      try {
-        return window.atob(params.get("board"))
-      } catch (err) {
-        return ""
-      }
-    });
-  }, [])
-
-  const getBoard = (() => {
-    return boards[board] || boards.default;
-  })
-
+  
+  const useBoardConfig = () => {
+    const [boardId, setBoardId] = useState(null)
+    
+    useEffect(() => {
+      const params = new URLSearchParams(window.location.search);
+      setBoardId(() => {
+        try {
+          return window.atob(params.get("board"))
+        } catch (err) {
+          return ""
+        }
+      });
+    }, [])
+    
+    return boards[boardId] || boards.default;
+  }
+    
   return (
     <div className="App">
       <header className="App-header">
         JINGO
       </header>
-      <Bingo card={getBoard()} />
+      <Bingo boardConfig={useBoardConfig()} />
     </div>
   );
 }
