@@ -1,0 +1,62 @@
+/* || DESIGN */
+
+.gameSquare {
+  /* || Dimensions */
+  /* || Positioning */
+  position: relative;
+  /* || Design */
+  color: var(--col-bg-pri);
+  background-color: var(--col-fg-pri);
+  font-size: 2.1vmin;
+  word-wrap: break-word;
+  /* || Content */
+  overflow: hidden;
+  /* || Utility */
+  cursor: pointer;
+  user-select: none;
+}
+
+.gameSquare.clicked {
+  /* || Dimensions */
+  /* || Positioning */
+  /* || Design */
+  color: var(--col-fg-pri);
+  background-color: var(--col-fg-ter);
+  /* || Content */
+  /* || Utility */
+}
+
+.gameSquare.candidate {
+  /* || Dimensions */
+  /* || Positioning */
+  /* || Design */
+  border-style: solid;
+  border-width: 5px;
+  border-color: var(--col-fg-pri);
+  /* || Content */
+  /* || Utility */
+}
+
+.gameSquare p {
+  /* || Dimensions */
+  /* || Positioning */
+  margin: 5px;
+  /* || Design */
+  /* || Content */
+  overflow: hidden;
+  /* || Utility */
+}
+
+.gameSquare .id {
+  /* || Dimensions */
+  /* || Positioning */
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  /* || Design */
+  color: var(--col-bg-ter);
+  opacity: 0.5;
+  /* || Content */
+  font-size: 1.8vmin;
+  /* || Utility */
+}

@@ -8,7 +8,9 @@ services:
     networks:
       - jingo-net
     expose:
-      - ${FRONTEND_PORT_HOST}
+      - ${FRONTEND_PORT_CONTAINER}
+    ports:
+      - ${FRONTEND_PORT_HOST}:${FRONTEND_PORT_CONTAINER}
 
 networks:
   jingo-net:
