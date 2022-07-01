@@ -16,11 +16,11 @@ const boards = {
       "DALA SPELADE INTE PÅ SIN JÄTTETRUMPET",
       "KAPITELMEDALJEN BLEV OFFICIELL",
     ], [
-      "BR WILHELMSSON SKREV NY MUSIK OCH TEXT",
-      "BÅDE STH OCH LCM BAR FEZ",
-      "FINNEN KENNETH KOM PÅ BESÖK",
-      "KORVEN BLEV OFRIVILLIGT GRATTIS",
-    ], [
+    //   "BR WILHELMSSON SKREV NY MUSIK OCH TEXT",
+    //   "BÅDE STH OCH LCM BAR FEZ",
+    //   "FINNEN KENNETH KOM PÅ BESÖK",
+    //   "KORVEN BLEV OFRIVILLIGT GRATTIS",
+    // ], [
       "MANLIGT BEHÄRSKAD GLÄDJE FANNS",
       "GOD MAT",
       "BRÄNN BRON SA TERSEN ",
@@ -90,7 +90,13 @@ function App() {
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    setBoard(() => (atob(params.get("board"))));
+    setBoard(() => {
+      try {
+        return atob(params.get("board"))
+      } catch(err) {
+        return ""
+      }
+    });
   }, [])
 
   const getBoard = (() => {
@@ -246,9 +252,15 @@ function Grid(props) {
           } else {
             return 0;
           }
+        } else if (columns > rows) {
+          if (dimension == "X") {
+            return -(winningOffset -0.5) / columns
+          } else {
+            return 0;
+          }
         } else {
           if (dimension == "X") {
-            return -(winningOffset - 0.5) / columns
+            return -(winningOffset) / columns
           } else {
             return 0;
           }
@@ -261,9 +273,15 @@ function Grid(props) {
           } else {
             return 0;
           }
+        } else if (columns > rows) {
+          if (dimension == "X") {
+            return -(winningOffset -0.5) / columns
+          } else {
+            return 0;
+          }
         } else {
           if (dimension == "X") {
-            return (winningOffset - 0.5) / columns
+            return (winningOffset) / columns
           } else {
             return 0;
           }
