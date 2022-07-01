@@ -1,7 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import React from 'react';
+import { click } from '@testing-library/user-event/dist/click';
 
 const boards = {
   board1: [ // Ym9hcmQx
@@ -57,31 +58,31 @@ const boards = {
       "empty",
       "empty",
       "empty",
-    ],[ 
+    ], [
       "empty",
       "empty",
       "empty",
       "empty",
       "empty",
-    ],[ 
+    ], [
       "empty",
       "empty",
       "empty",
       "empty",
       "empty",
-    ],[ 
+    ], [
       "empty",
       "empty",
       "empty",
       "empty",
       "empty",
-    ],[ 
+    ], [
       "empty",
       "empty",
       "empty",
       "empty",
       "empty",
-    ], 
+    ],
   ]
 }
 
@@ -93,7 +94,7 @@ function App() {
     setBoard(() => {
       try {
         return atob(params.get("board"))
-      } catch(err) {
+      } catch (err) {
         return ""
       }
     });
@@ -112,7 +113,7 @@ function App() {
       <header className="App-header">
         JINGO
       </header>
-        <Grid card={getBoard()} />
+      <Grid card={getBoard()} />
     </div>
   );
 }
@@ -141,11 +142,8 @@ function Grid(props) {
       }
     })
   }
-  useEffect(() => {
-    calcWin();
-  }, [clickedSquares])
 
-  const isOnDiagonalForward = (row, column) => {
+  const isOnDiagonalForward = useCallback((row, column) => {
     const coordinateCalc = row - (columns - column - 1);
     const gridCalc = rows - columns;
 
@@ -156,9 +154,9 @@ function Grid(props) {
     } else {
       return (coordinateCalc <= 0) && (coordinateCalc >= gridCalc)
     }
-  }
+  },[rows, columns])
 
-  const isOnDiagonalBackward = (row, column) => {
+  const isOnDiagonalBackward = useCallback((row, column) => {
     const coordinateCalc = row - column;
     const gridCalc = rows - columns;
 
@@ -169,13 +167,10 @@ function Grid(props) {
     } else {
       return (coordinateCalc <= 0) && (coordinateCalc >= gridCalc)
     }
-  }
+  },[rows, columns])
 
-  const isCandidate = (row, column) => {
-    return isOnDiagonalForward(row, column)
-  }
 
-  const calcWin = () => {
+  const calcWin = useCallback(() => {
     const numOfDiagonals = Math.abs(rows - columns) + 1;
     const diagonalLength = Math.min(columns, rows);
     let winCandidateColumns = Array(columns).fill(0);
@@ -202,6 +197,7 @@ function Grid(props) {
         }
       }
     })
+
     setCompleteLines(() => {
       let completeLines = []
       winCandidateColumns.map((element, index) => {
@@ -226,7 +222,18 @@ function Grid(props) {
       })
       return completeLines;
     })
+  },[rows, columns, clickedSquares, isOnDiagonalBackward, isOnDiagonalForward])
+
+
+  useEffect(() => {
+    calcWin();
+  }, [calcWin])
+
+  
+  const isCandidate = (row, column) => {
+    return isOnDiagonalForward(row, column)
   }
+
 
   const calcBarOffset = (dimension, winningDirection, winningOffset) => {
     const numOfDiagonals = Math.abs(rows - columns) + 1;
@@ -254,7 +261,7 @@ function Grid(props) {
           }
         } else if (columns > rows) {
           if (dimension == "X") {
-            return -(winningOffset -0.5) / columns
+            return -(winningOffset - 0.5) / columns
           } else {
             return 0;
           }
@@ -275,7 +282,7 @@ function Grid(props) {
           }
         } else if (columns > rows) {
           if (dimension == "X") {
-            return -(winningOffset -0.5) / columns
+            return -(winningOffset - 0.5) / columns
           } else {
             return 0;
           }
