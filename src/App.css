@@ -78,6 +78,7 @@
   word-wrap: break-word;
   overflow: hidden;
   cursor: pointer;
+  user-select: none;
 }
 
 .square.clicked {
@@ -93,7 +94,6 @@
 .square p {
   margin: 5px;
   overflow: hidden;
-  user-select: none;
 }
 
 .square .id {
