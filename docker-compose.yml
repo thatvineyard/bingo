@@ -3,12 +3,12 @@ services:
   jingo:
     build:
       context: .
-    ports:
-      - ${FRONTEND_PORT_HOST}:${FRONTEND_PORT_CONTAINER}
     environment:
       - WATCHPACK_POLLING
     networks:
       - jingo-net
+    expose:
+      - ${FRONTEND_PORT_HOST}
 
 networks:
   jingo-net:
