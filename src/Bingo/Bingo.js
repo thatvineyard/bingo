@@ -131,8 +131,8 @@ function Bingo(props) {
       />
       <BingoLineOverlay
         completeLines={completeLines}
-        columns={columns}
         rows={rows}
+        columns={columns}
       />
     </div>
   )

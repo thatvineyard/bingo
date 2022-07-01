@@ -4,7 +4,8 @@
   position: absolute;
   inset: 0;
   /* || Design */
-  opacity: 0.5;
+  --opacity: 0.5;
+  opacity: var(--opacity);
   /* || Content */
   overflow: hidden;
   /* || Utility */
@@ -17,6 +18,7 @@
   position: absolute;
   inset: 0;
   /* || Design */
+  --color: 0, 0, 0;
   /* || Content */
   /* || Utility */
 }
@@ -24,14 +26,14 @@
 .line.diagonalForward {
   /* || Dimensions */
   /* || Positioning */
-  transform: translate(calc(90vmin * var(--translateX)), calc(90vmin * var(--translateY))) scale(var(--scale));
+  transform: translate(calc(var(--size) * var(--translateX)), calc(var(--size) * var(--translateY))) scale(var(--scale));
   /* || Design */
   background:
     linear-gradient(to top left,
-      rgba(0, 0, 0, 0) 49%,
-      rgba(0, 0, 0, 1) 49%,
-      rgba(0, 0, 0, 1) 51%,
-      rgba(0, 0, 0, 0) 51%)
+      rgba(var(--color), 0) 49%,
+      rgba(var(--color), 255) 49%,
+      rgba(var(--color), 255) 51%,
+      rgba(var(--color), 0) 51%)
   /* || Content */
   /* || Utility */
 }
@@ -39,14 +41,14 @@
 .line.diagonalBackward {
   /* || Dimensions */
   /* || Positioning */
-  transform: translate(calc(90vmin * var(--translateX)), calc(90vmin * var(--translateY))) scale(var(--scale));
+  transform: translate(calc(var(--size) * var(--translateX)), calc(var(--size) * var(--translateY))) scale(var(--scale));
   /* || Design */
   background:
     linear-gradient(to bottom left,
-      rgba(0, 0, 0, 0) 49%,
-      rgba(0, 0, 0, 1) 49%,
-      rgba(0, 0, 0, 1) 51%,
-      rgba(0, 0, 0, 0) 51%)
+    rgba(var(--color), 0) 49%,
+    rgba(var(--color), 255) 49%,
+    rgba(var(--color), 255) 51%,
+    rgba(var(--color), 0) 51%)
   /* || Content */
   /* || Utility */
 }
@@ -54,14 +56,14 @@
 .line.row {
   /* || Dimensions */
   /* || Positioning */
-  transform: translateY(calc(90vmin * var(--translateY)));
+  transform: translateY(calc(var(--size) * var(--translateY)));
   /* || Design */
   background:
     linear-gradient(to bottom,
-      rgba(0, 0, 0, 0) 48.5%,
-      rgba(0, 0, 0, 1) 48.5%,
-      rgba(0, 0, 0, 1) 51.5%,
-      rgba(0, 0, 0, 0) 51.5%)
+    rgba(var(--color), 0) 49%,
+    rgba(var(--color), 255) 49%,
+    rgba(var(--color), 255) 51%,
+    rgba(var(--color), 0) 51%)
   /* || Content */
   /* || Utility */
 }
@@ -69,14 +71,14 @@
 .line.column {
   /* || Dimensions */
   /* || Positioning */
-  transform: translateX(calc(90vmin * var(--translateX)));
+  transform: translateX(calc(var(--size) * var(--translateX)));
   /* || Design */
   background:
     linear-gradient(to right,
-      rgba(0, 0, 0, 0) 48.5%,
-      rgba(0, 0, 0, 1) 48.5%,
-      rgba(0, 0, 0, 1) 51.5%,
-      rgba(0, 0, 0, 0) 51.5%)
+    rgba(var(--color), 0) 49%,
+    rgba(var(--color), 255) 49%,
+    rgba(var(--color), 255) 51%,
+    rgba(var(--color), 0) 51%)
   /* || Content */
   /* || Utility */
 }

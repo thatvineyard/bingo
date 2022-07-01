@@ -1,6 +1,6 @@
 .App {
   /* || Dimensions */
-  min-height: 100vh;
+  height: 100vh;
   width: 100%;
   /* || Positioning */
   /* || Design */
@@ -23,7 +23,10 @@
 
 .App #title {
   /* || Dimensions */
+  width: 60%;
   /* || Positioning */
+  position: relative;
+  margin: auto;
   /* || Design */
   font-size: 20vmin;
   /* || Content */

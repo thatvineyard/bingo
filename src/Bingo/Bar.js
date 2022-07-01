@@ -5,8 +5,7 @@ function Bar(props) {
         "--translateX": props.calcBarOffset("X", props.winningDirection, props.winningOffset),
         "--translateY": props.calcBarOffset("Y", props.winningDirection, props.winningOffset),
         "--scale": props.calcBarScale(props.winningDirection),
-        "--color=1": `${props.color}-1`,
-        "--color=2": `${props.color}-1`,
+        "--color": `${props.color || "0, 0, 0"}`
       }}
     />
   )

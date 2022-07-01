@@ -1,4 +1,5 @@
 import './BingoLineOverlay.css'
+import Bar from './Bar';
 
 function BingoLineOverlay(props) {
   const calcBarOffset = (dimension, winningDirection, winningOffset) => {
@@ -74,27 +75,21 @@ function BingoLineOverlay(props) {
   }
 
   return (
-    <div className="overlay">
+    <div className="overlay"
+      style={{
+        "--opacity": `${props.opacity || "0.5"}`
+      }}
+    >
       {props.completeLines.map((element) => (
         <Bar key={`${element.direction}${element.index}`} 
         winningDirection={element.direction} 
         winningOffset={element.index} 
         calcBarOffset={calcBarOffset} 
-        calcBarScale={calcBarScale} />
+        calcBarScale={calcBarScale} 
+        color={props.color}
+        />
       ))}
     </div>
-  )
-}
-
-function Bar(props) {
-  return (
-    <div className={`line ${props.winningDirection}`}
-      style={{
-        "--translateX": props.calcBarOffset("X", props.winningDirection, props.winningOffset),
-        "--translateY": props.calcBarOffset("Y", props.winningDirection, props.winningOffset),
-        "--scale": props.calcBarScale(props.winningDirection)
-      }}
-    />
   )
 }
 
