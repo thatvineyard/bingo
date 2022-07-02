@@ -10,7 +10,7 @@
   display: grid;
   grid-template-columns: repeat(var(--columns), 1fr);
   grid-template-rows: repeat(var(--rows), 1fr);
-  gap: 3vmin;
+  gap: 2vmin;
   
   align-items: stretch;
   justify-items: stretch;

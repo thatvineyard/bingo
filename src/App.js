@@ -34,7 +34,7 @@ function App() {
     <div className="App">
       <div id="title">
         <header>
-          JINGO
+          BINGO
         </header>
         <BingoLineOverlay 
           completeLines={[{ direction: "row", index: 0 }]} 
