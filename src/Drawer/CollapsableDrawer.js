@@ -7,7 +7,7 @@ const defaultProps = {
   width: 300
 }
 const CollapsableDrawer = (props) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const toggleOpen = () => {
     setIsOpen((prevOpen) => {
