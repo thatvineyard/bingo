@@ -25,7 +25,7 @@ const CollapsableDrawer = (props) => {
         <div className='content static'
           style={{
             zIndex: 11,
-            pointerEvents: isOpen ? "none" : "all"
+            pointerEvents: "none"
           }}
         >
           <div className='header'
