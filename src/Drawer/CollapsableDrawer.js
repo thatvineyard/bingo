@@ -20,6 +20,7 @@ const CollapsableDrawer = (props) => {
       <div className="drawer"
         style={{
           width: `${props.width}px`,
+          pointerEvents: "none"
         }}
       >
         <div className='content static'
@@ -58,7 +59,10 @@ const CollapsableDrawer = (props) => {
           </div>
         </div>
         <div className='content collapsable'
-          style={{ "--hide": isOpen ? "0%" : "100%" }}
+          style={{ 
+            "--hide": isOpen ? "0%" : "100%",
+            pointerEvents: isOpen ? "all" : "none"
+         }}
         >
           <div className='header'
             style={{
