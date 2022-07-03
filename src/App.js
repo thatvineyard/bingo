@@ -40,7 +40,7 @@ function App() {
       return list;
     }
 
-    return list.filter(e => e.startsWith(searchString))
+    return list.filter(e => e.includes(searchString))
   }
 
   const handleChange = (event) => {
@@ -53,7 +53,7 @@ function App() {
         <CollapsableDrawer
           header="Select Board"
           headerHeight={30}
-          width={300}
+          width={250}
         >
           <p>Search: <input
             value={searchString}
@@ -67,8 +67,8 @@ function App() {
                 { icon: "board", text: element, link: `?board=${window.btoa(element)}` }
               ))
             }
-            lineHeight={30}
-            fontSize={20}
+            lineHeight={20}
+            fontSize={15}
             iconGap={10}
             iconColor={"var(--col-fg-pri)"}
           />
