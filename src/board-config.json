@@ -36,6 +36,43 @@
       "empty"
     ]
   ],
+  "demo": [
+    [
+      "Let's take this offline",
+      "Someone takes the meeting from the car",
+      "Someone forgets to mute their mic",
+      "Product owner goes on hold without saying",
+      "'Reinvent the wheel'"
+    ],
+    [
+      "'Low hanging fruit'",
+      "'____ as a service' or '_aaS'",
+      "Private Cloud",
+      "Wants AI but can't say for what",
+      "Acts like POC is production ready"
+    ],
+    [
+      "Completely silent when demo is done",
+      "'T Shaped'",
+      "'Military Grade Encryption'",
+      "'Like a start-up'",
+      "'Web 3.0'"
+    ],
+    [
+      "'IoT'",
+      "Arguing about how to write stories",
+      "Someone important is late so the meeting has to start over",
+      "Redundancy ",
+      "Big Data"
+    ],
+    [
+      "'Roadblocks''",
+      "Discussion which can wait until after meeting",
+      "'Pain points'",
+      "'There seems to be a disconnect'",
+      "The person who brings up an issue is assigned to fix it"
+    ]
+  ],
   "board1": [
     [
       "NÅGON FÖLL UNDER BORDET",
