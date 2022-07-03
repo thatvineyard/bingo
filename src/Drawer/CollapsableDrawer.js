@@ -61,6 +61,7 @@ const CollapsableDrawer = (props) => {
         <div className='content collapsable'
           style={{ 
             "--hide": isOpen ? "0%" : "100%",
+            "--visibility": isOpen ? "100%" : "0%",
             pointerEvents: isOpen ? "all" : "none"
          }}
         >
