@@ -68,13 +68,13 @@ const CollapsableDrawer = (props) => {
           <div className='header'
             style={{
               height: `${props.headerHeight}px`,
-              marginLeft: `${props.headerHeight}px`,
+              marginLeft: `${props.headerHeight + 10}px`,
               width: `calc(100% - ${props.headerHeight + 20}px)`,
               display: "flex",
               alignItems: "center"
             }}
           >
-            <h1>Select board</h1>
+            <h1>{props.header}</h1>
           </div>
           {props.children}
         </div>

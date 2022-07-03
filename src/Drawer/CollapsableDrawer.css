@@ -2,7 +2,7 @@
   /* || Dimensions */
   /* || Positioning */
   position: absolute;
-  top: 0px;
+  top: 5px;
   left: 0px;
   bottom: 20px;
   /* || Design */
@@ -33,7 +33,7 @@
   position: absolute;
   inset: 0px;
   padding-top: 10px;
-  padding-left: 10px;
+  padding-left: 20px;
   padding-right: 10px;
   bottom: 0;
   /* Design */

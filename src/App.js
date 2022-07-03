@@ -31,19 +31,39 @@ function App() {
 
     return boards[boardId] || boards.default;
   }
+  const list = ["default", "demo", "board1", "board2"]
 
-  const list=["default", "demo", "board1", "board2"]
+  const [searchString, setSearchString] = useState("");
+
+  const searchedList = () => {
+    if (searchString === "") {
+      return list;
+    }
+
+    return list.filter(e => e.startsWith(searchString))
+  }
+
+  const handleChange = (event) => {
+    setSearchString(event.target.value);
+  }
 
   return (
     <div className="App">
       <nav>
         <CollapsableDrawer
+          header="Select Board"
           headerHeight={30}
           width={300}
         >
+          <p>Search: <input
+            value={searchString}
+            onChange={handleChange}
+            placeholder="Write here to search..."
+          />
+          </p>
           <IconList
             items={
-              list.map((element) => (
+              searchedList().map((element) => (
                 { icon: "board", text: element, link: `?board=${window.btoa(element)}` }
               ))
             }

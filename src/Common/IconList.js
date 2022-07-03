@@ -1,4 +1,5 @@
 import Icon from "./Icon";
+import './IconList.css';
 
 function IconList(props) {
   return (
@@ -11,12 +12,13 @@ function IconList(props) {
     >
       {props.items.map((element) =>
         <li
+          key={element.text}
           style={{
             display: "flex",
             flexDirection: "row",
             alignItems: "center",
             height: `${props.lineHeight}px`,
-            margin: "10px"
+            marginBlock: "10px"
           }}
         >
           <Icon 
