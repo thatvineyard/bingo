@@ -7,8 +7,7 @@ services:
         - ENV_BUILD=.envbuild.test
     networks:
       - bingo-net
-    hostname:
-      - bingo-test
+    hostname: bingo-test
     expose:
       - ${FRONTEND_PORT_CONTAINER}
     ports:
