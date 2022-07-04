@@ -11,13 +11,9 @@ COPY public/ ./public/
 
 RUN npm run build
 
-CMD ["bash", "-c", "npm start"]
-
 FROM builder as tester
 
 RUN npm run test -- --watchAll=false
-
-# CMD ["bash", "-c", "npm test -- --watch"]
 
 FROM nginx:1.23.0
 

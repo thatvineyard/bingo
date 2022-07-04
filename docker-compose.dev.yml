@@ -10,6 +10,7 @@ services:
       - ${FRONTEND_PORT_HOST}:${FRONTEND_PORT_CONTAINER}
     env_file:
       - .env.dev
+    command: ["bash", "-c", "npm start"]
 
   bingo-tester:
     build:
