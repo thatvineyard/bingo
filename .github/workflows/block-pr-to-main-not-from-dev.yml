@@ -1,0 +1,18 @@
+name: Block PR to main not from dev
+
+on:
+  pull_request_target:
+    branches: [main]
+    types: [opened]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Check source branch is 'dev'"
+        run: "[ ${GITHUB_REF} ==  'dev' ]"
+      - name: "Close PR automatically"
+        if: ${{ failure }}
+        run: echo "Close!"
+        
