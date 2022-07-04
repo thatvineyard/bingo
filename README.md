@@ -11,7 +11,7 @@
 
 ```
 docker-compose build; docker-compose up -d; docker-compose logs -f
-```
+``` 
 
 ### Dev - container
 1. Make a copy of `.env.template` called `.env.dev` and update the values.
