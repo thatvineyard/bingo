@@ -6,6 +6,7 @@ services:
       target: builder
     volumes:
       - ./${FRONTEND_FOLDER}/src/:/app/src/
+      - ./${FRONTEND_FOLDER}/public/:/app/public/
     ports:
       - ${FRONTEND_PORT_HOST}:${FRONTEND_PORT_CONTAINER}
     env_file:
