@@ -11,7 +11,9 @@ jobs:
 
     steps:
       - name: "Check source branch is 'dev'"
-        run: "[ ${GITHUB_REF} ==  'dev' ]"
+        run: |
+          echo "PR source branch: ${GITHUB_HEAD_REF}"
+          test "${GITHUB_HEAD_REF}" =  "dev"
       - name: "Close PR automatically"
         if: ${{ failure() }}
         uses: superbrothers/close-pull-request@v3
