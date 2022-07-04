@@ -1,3 +1,5 @@
+ARG ENV_BUILD=".envbuild"
+
 FROM node:16.15.1 AS builder
 
 WORKDIR /app
@@ -8,6 +10,8 @@ RUN npm install
 COPY src/ ./src/
 COPY webpack.config.js .
 COPY public/ ./public/
+ARG ENV_BUILD
+COPY ${ENV_BUILD} .env
 
 RUN npm run build
 
