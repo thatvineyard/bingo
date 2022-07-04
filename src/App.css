@@ -62,3 +62,12 @@
   border-color: var(--col-fg-pri);
   outline: none;
 }
+
+.App .appVersion {
+  color: var(--col-fg-sec);
+  font-size: 1.8vmin;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: inherit;
+}

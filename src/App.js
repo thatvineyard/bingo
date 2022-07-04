@@ -91,6 +91,7 @@ function App() {
             iconGap={0}
             iconColor={"var(--col-fg-pri)"}
           />
+          <p className="appVersion">Version: {process.env.REACT_APP_VERSION || "Not found"}</p>
         </CollapsableDrawer>
       </nav>
       <div id="title">
