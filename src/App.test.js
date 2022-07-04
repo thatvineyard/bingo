@@ -3,6 +3,6 @@ import App from './App';
 
 test('Bingo title exists', () => {
   render(<App />);
-  const linkElement = screen.getByText(/Bingo/i);
+  const linkElement = screen.getByText(/Bigo/i);
   expect(linkElement).toBeInTheDocument();
 });
