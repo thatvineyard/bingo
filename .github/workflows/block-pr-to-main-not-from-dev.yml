@@ -6,7 +6,7 @@ on:
     types: [opened]
 
 jobs:
-  deploy:
+  block-pr:
     runs-on: ubuntu-latest
 
     steps:
