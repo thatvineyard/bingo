@@ -1,0 +1,21 @@
+name: Release
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Set up environment"
+        run: |
+          wget -O /usr/local/bin/semver \
+          https://raw.githubusercontent.com/fsaintjacques/semver-tool/master/src/semver
+
+          # Make script executable
+          chmod +x /usr/local/bin/semver
+
+          # Prove it works
+          semver --version
