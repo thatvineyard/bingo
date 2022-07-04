@@ -6,7 +6,7 @@ services:
       args:
         - ENV_BUILD=.envbuild.test
     networks:
-      - bingo-net
+      - bingotest-net
     hostname: bingo-test
     expose:
       - ${FRONTEND_PORT_CONTAINER}
@@ -14,7 +14,7 @@ services:
       - ${FRONTEND_PORT_HOST}:${FRONTEND_PORT_CONTAINER}
 
 networks:
-  bingo-net:
+  bingotest-net:
     driver: bridge
 
 # Command to run:
