@@ -1,0 +1,14 @@
+.iconList {
+  margin: 0;
+}
+
+.iconList li .content {
+  height: 100%;
+  position: relative;
+}
+
+.iconList li .content .subText {
+  font-size: 10px;
+  margin: 0;
+  color: var(--col-fg-sec);
+}

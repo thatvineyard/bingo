@@ -6,8 +6,8 @@ import React from 'react';
 
 // Static functions
 function calcDimensions(boardConfig) {
-  let rows = boardConfig.length;
-  let columns = boardConfig.reduce(
+  let rows = boardConfig.layout.length;
+  let columns = boardConfig.layout.reduce(
     (previousValue, currentValue) => Math.max(previousValue, currentValue.length),
     0
   );
@@ -15,7 +15,7 @@ function calcDimensions(boardConfig) {
 }
 
 function Bingo(props) {
-  const getText = (row, column) => (props.boardConfig[row][column] || "Free Space")
+  const getText = (row, column) => (props.boardConfig.layout[row][column] || "Free Space")
   const [rows, columns] = calcDimensions(props.boardConfig)
   const [clickedSquares, setClickedSquares] = useState([])
   const [completeLines, setCompleteLines] = useState([]);

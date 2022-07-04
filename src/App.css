@@ -8,8 +8,8 @@
   --col-bg-sec: #363b46;
   --col-bg-ter: #8190ac;
   --col-fg-pri: #d9dde4;
-  --col-fg-sec: #636a77; 
-  --col-fg-ter: #636a77;
+  --col-fg-sec: #7d8ca5; 
+  --col-fg-ter: #4e5158;
 
   color: var(--col-fg-pri);
   background-color: var(--col-bg-pri);
@@ -46,4 +46,19 @@
   /* || Design */
   /* || Content */
   /* || Utility */
+}
+
+.App input {
+  background-color: var(--col-fg-ter);
+  border-radius: 20px;
+  border-style: solid;
+  border-color: var(--col-fg-sec);
+  padding-inline: 10px;
+  color: var(--col-fg-pri);
+}
+
+.App input:focus {
+  background-color: var(--col-bg-ter);
+  border-color: var(--col-fg-pri);
+  outline: none;
 }

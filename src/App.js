@@ -11,8 +11,7 @@ const boards = require('./board-config.json');
 
 function App() {
 
-  //  
-  // userBoardConfig  
+  // useBoardConfig  
   // Looks at the query parameter `board` and base64 decodes
   // it and grabs the board config from the json file.
   const useBoardConfig = () => {
@@ -29,27 +28,68 @@ function App() {
       });
     }, [])
 
-    return boards[boardId] || boards.default;
+    let board = boards.find(element => element.id === boardId) || boards.find(element => element.id === "0");
+    return board;
+    // return boards[boardId] || boards.default;
   }
 
-  const list=["default", "demo", "board1", "board2"]
+  const useBoardList = () => {
+    const [boardList, setBoardList] = useState([]);
+
+    useEffect(() => {
+      setBoardList(() => {
+        return boards.map(element => {
+          let result = {...element}
+          delete result.element
+          return result;
+        })
+      })
+    }, [])
+
+    return boardList;
+  }
+
+  const list = ["default", "demo", "board1", "board2"];
+  const boardList = useBoardList();
+
+
+  const [searchString, setSearchString] = useState("");
+
+  const searchedList = () => {
+    if (searchString === "") {
+      return boardList;
+    }
+
+    return boardList.filter(e => e.name.includes(searchString))
+  }
+
+  const handleChange = (event) => {
+    setSearchString(event.target.value);
+  }
 
   return (
     <div className="App">
       <nav>
         <CollapsableDrawer
+          header="Select Board"
           headerHeight={30}
-          width={300}
+          width={250}
         >
+          <p>Search: <input
+            value={searchString}
+            onChange={handleChange}
+            placeholder="Write here to search..."
+          />
+          </p>
           <IconList
             items={
-              list.map((element) => (
-                { icon: "board", text: element, link: `?board=${window.btoa(element)}` }
+              searchedList().map((board) => (
+                { icon: "board", text: board.name, subText: board.tags.join(", "), link: `?board=${window.btoa(board.id)}` }
               ))
             }
-            lineHeight={30}
-            fontSize={20}
-            iconGap={10}
+            lineHeight={40}
+            fontSize={15}
+            iconGap={0}
             iconColor={"var(--col-fg-pri)"}
           />
         </CollapsableDrawer>

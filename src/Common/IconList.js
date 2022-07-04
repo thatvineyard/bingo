@@ -1,8 +1,9 @@
 import Icon from "./Icon";
+import './IconList.css';
 
 function IconList(props) {
   return (
-    <ul class="iconList"
+    <ul className="iconList"
       style={{
         paddingLeft: "0px",
         listStyle: "none",
@@ -11,15 +12,16 @@ function IconList(props) {
     >
       {props.items.map((element) =>
         <li
+          key={element.text}
           style={{
             display: "flex",
             flexDirection: "row",
             alignItems: "center",
             height: `${props.lineHeight}px`,
-            margin: "10px"
+            marginBlock: "10px"
           }}
         >
-          <Icon 
+          <Icon
             type={element.icon}
             size={props.lineHeight}
             color={props.iconColor}
@@ -28,7 +30,10 @@ function IconList(props) {
             }}
             link={element.link}
           />
-          {element.link ? <a href={element.link}>{element.text}</a> : <>{element.text}</>}
+          <div className="content">
+            {element.link ? <a href={element.link}>{element.text}</a> : <>{element.text}</>}
+            {element.subText ? <p className="subText">{element.subText}</p> : <></>}
+          </div>
         </li>
       )}
     </ul>

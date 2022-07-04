@@ -2,7 +2,7 @@
   /* || Dimensions */
   /* || Positioning */
   position: absolute;
-  top: 0px;
+  top: 5px;
   left: 0px;
   bottom: 20px;
   /* || Design */
@@ -33,7 +33,7 @@
   position: absolute;
   inset: 0px;
   padding-top: 10px;
-  padding-left: 10px;
+  padding-left: 20px;
   padding-right: 10px;
   bottom: 0;
   /* Design */
@@ -54,15 +54,16 @@
   /* || Dimensions */
   /* || Positioning */
   /* || Design */
+  --hide: 100%;
+  --visibility: 0%;
   background-color: var(--col-bg-sec);
 
   border-bottom-right-radius: 20px;
   border-top-right-radius: 20px;
 
-  box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 5px 5px 100px rgba(0, 0, 0, var(--visibility));
   /* || Content */
   /* || Utility */
-  --hide: 100%;
   transform: translateX(calc(var(--hide) * -1));
-  transition: transform 0.5s;
+  transition: transform 0.5s, box-shadow 0.5s;
 }

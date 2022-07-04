@@ -14,7 +14,8 @@ const iconMap = {
 
 const Icon = (props) => {
   return (
-    <div class={`icon`}
+    <div 
+      className={`icon ${props.hidden ? "fadeOut" : "fadeIn"}`}
       alt="menu button"
       style={{
         ...props.style,
@@ -24,7 +25,6 @@ const Icon = (props) => {
         height: props.size || 50,
         cursor: props.onClick ? "pointer" : "inherit",
       }}
-      className={`icon ${props.hidden ? "fadeOut" : "fadeIn"}`}
       onClick={props.onClick}
     >
       <a href={props.link}
