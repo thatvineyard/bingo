@@ -11,11 +11,15 @@ COPY public/ ./public/
 
 RUN npm run build
 
-CMD ["npm", "start"]
+CMD ["bash", "-c", "npm start"]
+
+FROM builder as tester
+
+RUN npm run test -- --watchAll=false
+
+# CMD ["bash", "-c", "npm test -- --watch"]
 
 FROM nginx:1.23.0
-
-EXPOSE 80
 
 COPY --from=builder /app/build/ /usr/share/nginx/html/
 

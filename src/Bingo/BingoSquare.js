@@ -1,6 +1,10 @@
 
 import './BingoSquare.css'
 
+const defaultProps = {
+  getClicked: () => (false),
+  getText: () => (""),
+}
 function GameSquare(props) {
   return (
     <div
@@ -15,4 +19,5 @@ function GameSquare(props) {
   )
 }
 
+GameSquare.defaultProps = defaultProps;
 export default GameSquare;

@@ -1,0 +1,16 @@
+name: Verify Pull Request
+
+on:
+  pull_request:
+    branches: [ $default-branch ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Build Image
+        run: docker build -t builder --target builder .
+      - name: Run test
+        run: docker build -t tester --target tester .
