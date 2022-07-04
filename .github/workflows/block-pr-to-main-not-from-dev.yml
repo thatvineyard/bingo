@@ -3,7 +3,6 @@ name: Block PR to main not from dev
 on:
   pull_request_target:
     branches: [main]
-    types: [opened]
 
 jobs:
   deploy:
