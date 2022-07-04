@@ -89,5 +89,86 @@
         "The person who brings up an issue is assigned to fix it"
       ]
     ]
+  },
+  {
+    "id": "2",
+    "name": "Eurovision Watch Party",
+    "tags": [
+      "builtin music tv watch party"
+    ],
+    "layout": [
+      [
+        "'This country isn't in Europe'",
+        "Anybody raps",
+        "Shell suits",
+        "Whistling",
+        "Someone wearing a hat"
+      ],
+      [
+        "Key change",
+        "Emo",
+        "The UK Gets 12 points",
+        "Obviously fake instrument playing",
+        "Wings"
+      ],
+      [
+        "The UK gets one point",
+        "Audience member with flag facepaint",
+        "Past",
+        "Wind machine",
+        "Blatant political voting"
+      ],
+      [
+        "Singing out of tune",
+        "Glitter cannon",
+        "Winking at the camera",
+        "A song about love",
+        "12 points to a neighbor"
+      ],
+      [
+        "Sequins",
+        "Fire",
+        "Presenter outfit change",
+        "Clappy bit!",
+        "Pleather outfit"
+      ]
+    ]
+  },
+  {
+    "id": "3",
+    "name": "Oscars",
+    "tags": [
+      "builtin movies awards show"
+    ],
+    "layout": [
+      [
+        "Host sings and/or dances",
+        "Reference to Michael Keaton playing Batman",
+        "Political thank you speech about race",
+        "Bragging about the importance of movies",
+        "Actor pretending to be mad at joke"
+      ],
+      [
+        "Age gap of more than 10 years between presenters",
+        "Someone is played off",
+        "Someone trips",
+        "Montage",
+        "'Cast and crew'"
+      ],
+      [
+        "Political thank you speech about gender",
+        "Mentioning another movie that got snubbed",
+        "Doesn't thank their husband/wife/partner",
+        "Wacky outfit",
+        "On-camera smooch"
+      ],
+      [
+        "Celebrity wearing sunglasses indoors",
+        "Selfie!",
+        "Exits wrong side of the stage",
+        "Standing ovation",
+        "Winner is a movie you've never heard of"
+      ]
+    ]
   }
 ]
