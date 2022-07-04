@@ -9,6 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v3
       - name: "Check source branch is 'dev'"
         run: "[ ${GITHUB_REF} ==  'dev' ]"
       - name: "Close PR automatically"
