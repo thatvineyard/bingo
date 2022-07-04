@@ -28,6 +28,6 @@ jobs:
           SSH_HOST: ${{ secrets.PROD_SSH_HOST }}
           SSH_KEY: ${{ secrets.PROD_SSH_KEY }}
       - name: Recreate Docker Compose (SSH)
-        run: ssh ${TARGET_ENV} cd /opt/bingo; docker-compose build; docker-compose up -d
+        run: ssh ${TARGET_ENV} "cd /opt/bingo; docker-compose build; docker-compose up -d"
         env:
           TARGET_ENV: prod
