@@ -14,5 +14,6 @@ jobs:
         run: "[ ${GITHUB_REF} ==  'dev' ]"
       - name: "Close PR automatically"
         if: ${{ failure() }}
-        run: echo "Close!"
-        
+        uses: superbrothers/close-pull-request@v3
+        with:
+          comment: "Cannot create PR to `main` from any branch other than `dev`
