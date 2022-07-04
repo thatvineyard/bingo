@@ -16,7 +16,7 @@ jobs:
           echo "${SSH_KEY}" > ~/.ssh/${TARGET_ENV}.key
           chmod 600 ~/.ssh/${TARGET_ENV}.key
           cat >>~/.ssh/config <<END
-          Host staging
+          Host ${TARGET_ENV}
             HostName ${SSH_HOST}
             User ${SSH_USER}
             IdentityFile ~/.ssh/${TARGET_ENV}.key
@@ -27,3 +27,7 @@ jobs:
           SSH_USER: ${{ secrets.PROD_SSH_USER }}
           SSH_HOST: ${{ secrets.PROD_SSH_HOST }}
           SSH_KEY: ${{ secrets.PROD_SSH_KEY }}
+      - name: Test SSH
+        run: ssh ${TARGET_ENV} echo ok
+        env:
+          TARGET_ENV: prod
