@@ -1,11 +1,11 @@
 {
-  "short_name": "Jingo",
-  "name": "Juvenalisk Bingo",
+  "short_name": "Bingo",
+  "name": "Bingo",
   "icons": [
     {
-      "src": "favicon-jo-32x32.png",
-      "type": "image/png",
-      "sizes": "32x32"
+      "src": "favicon-wlogo-64x64",
+      "type": "image/x-icon",
+      "sizes": "64x64"
     }
   ],
   "start_url": ".",
