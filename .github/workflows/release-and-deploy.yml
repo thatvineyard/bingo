@@ -1,0 +1,32 @@
+name: Bump tag on push
+
+on:
+  push:
+    branches: [main, dev]
+
+jobs:
+  bump-tag:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: "Set up environment"
+        id: set-up-env
+        run: |
+          # Set up environment
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            echo "BUMP_LEVEL=minor" >> "$GITHUB_ENV"
+          elif [ "${{ github.ref }}" = "refs/heads/dev" ]; then
+            echo "BUMP_LEVEL=patch" >> "$GITHUB_ENV"
+          else
+            echo "BUMP_LEVEL=false" >> "$GITHUB_ENV"
+          fi         
+      - name: Bump version and push tag
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          default_bump: ${{ steps.set-up-env.outputs.BUMP_LEVEL }}
+          release_branches: main,dev
