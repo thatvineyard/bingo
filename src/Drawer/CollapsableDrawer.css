@@ -26,6 +26,20 @@
   margin: 0;
 }
 
+.drawer .footer {
+  /* || Dimensions */
+  width: 100%;
+  height: 30px;
+  /* || Positioning */
+  /* position: absolute;
+  top: 0px;
+  left: 0px; */
+  /* || Design */
+  /* || Content */
+  /* || Utility */
+}
+
+
 .drawer .content {
   /* || Dimensions */
   width: calc(100% - 20px);
@@ -39,6 +53,7 @@
   /* || Design */
   text-align: left;
   /* || Content */
+  overflow-y: scroll;
   /* || Utility */
 }
 
