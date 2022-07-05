@@ -1,4 +1,4 @@
-name: Bump tag on push
+name: Bump tag and deploy on push
 
 on:
   push:
