@@ -25,7 +25,6 @@ jobs:
           echo "BUMP_LEVEL=patch" >> $GITHUB_ENV
           echo "SSH_USER=${{ secrets.TEST_SSH_USER }}" >> $GITHUB_ENV
           echo "SSH_HOST=${{ secrets.TEST_SSH_HOST }}" >> $GITHUB_ENV
-          # echo "SSH_KEY=${{ secrets.TEST_SSH_KEY }}" >> $GITHUB_ENV
       # - name: "Set up environment"
       #   id: set-up-env
       #   run: |
