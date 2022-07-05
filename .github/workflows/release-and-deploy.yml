@@ -53,13 +53,22 @@ jobs:
             StrictHostKeyChecking no
           END
         env:
-          TARGET_ENV: ${env.TARGET_ENV}
+          TARGET_ENV: ${{ env.TARGET_ENV }}
           SSH_USER: ${{ secrets[env.SSH_USER_SECRET] }}
           SSH_HOST: ${{ secrets[env.SSH_HOST_SECRET] }}
           SSH_KEY: ${{ secrets[env.SSH_KEY_SECRET] }}
       - name: Pull code (SSH)
-        run: ssh ${env.TARGET_ENV} "cd ${env.TARGET_ENV_FOLDER}; git pull;"
+        run: ssh ${TARGET_ENV} "cd ${TARGET_ENV_FOLDER}; git pull;"
+        env:
+          TARGET_ENV: ${{ env.TARGET_ENV }}
+          TARGET_ENV_FOLDER: ${{ env.TARGET_ENV_FOLDER }}       
       - name: Build Docker Compose (SSH)
-        run: ssh ${env.TARGET_ENV} "cd ${env.TARGET_ENV_FOLDER}; docker-compose -f docker-compose.yml build"
+        run: ssh ${TARGET_ENV} "cd ${TARGET_ENV_FOLDER}; docker-compose -f docker-compose.yml build"
+        env:
+          TARGET_ENV: ${{ env.TARGET_ENV }}
+          TARGET_ENV_FOLDER: ${{ env.TARGET_ENV_FOLDER }}       
       - name: Start Docker Compose (SSH)
-        run: ssh ${env.TARGET_ENV} "cd ${env.TARGET_ENV_FOLDER}; docker-compose -f docker-compose.yml up -d"
+        run: ssh ${TARGET_ENV} "cd ${TARGET_ENV_FOLDER}; docker-compose -f docker-compose.yml up -d"
+        env:
+          TARGET_ENV: ${{ env.TARGET_ENV }}
+          TARGET_ENV_FOLDER: ${{ env.TARGET_ENV_FOLDER }}       
