@@ -63,9 +63,9 @@
   outline: none;
 }
 
-.App .appVersion {
+.App .appDetails {
   color: var(--col-fg-sec);
-  font-size: 1.8vmin;
+  font-size: 1.5vmin;
   position: absolute;
   bottom: 0;
   right: 0;
