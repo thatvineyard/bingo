@@ -34,6 +34,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           default_bump: ${{ steps.set-up-env.outputs.BUMP_LEVEL }}
+          release_branches: main,dev
 
       # - name: "Get previous tag"
       #   id: get-previous-tag
