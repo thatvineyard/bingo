@@ -28,14 +28,21 @@ jobs:
           else
              echo "::set-output name=BUMP_LEVEL::release"
           fi         
-      - name: "Get previous tag"
-        id: get-previous-tag
-        run: |
-          echo "$(git describe --tags --abbrev=0)"
-          echo "::set-output name=TAG::$(git describe --tags --abbrev=0)"
-      - name: "Bump tag"
-        id: bump-tag
-        run: |
-          echo "::set-output name=NEW_TAG::$(semver bump ${{ steps.set-up-env.outputs.BUMP_LEVEL }} ${{ steps.get-previous-tag.outputs.TAG }})"
-      - name: "Output preivious tag"
-        run: echo "Updating tag ${{ steps.get-previous-tag.outputs.TAG }} -> ${{ steps.bump-tag.outputs.NEW_TAG }}"
+      - name: Bump version and push tag
+        id: tag_version
+        uses: mathieudutour/github-tag-action@v6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          default_bump: ${{ steps.set-up-env.outputs.BUMP_LEVEL }}
+
+      # - name: "Get previous tag"
+      #   id: get-previous-tag
+      #   run: |
+      #     echo "$(git describe --tags --abbrev=0)"
+      #     echo "::set-output name=TAG::$(git describe --tags --abbrev=0)"
+      # - name: "Bump tag"
+      #   id: bump-tag
+      #   run: |
+      #     echo "::set-output name=NEW_TAG::$(semver bump ${{ steps.set-up-env.outputs.BUMP_LEVEL }} ${{ steps.get-previous-tag.outputs.TAG }})"
+      # - name: "Output preivious tag"
+      #   run: echo "Bumping tag (${{ steps.set-up-env.outputs.BUMP_LEVEL }}) ${{ steps.get-previous-tag.outputs.TAG }} -> ${{ steps.bump-tag.outputs.NEW_TAG }}"
