@@ -13,15 +13,21 @@ jobs:
         with:
           fetch-depth: 0
       - name: "Set up environment"
+        id: set-up-env
         run: |
+          # Set up semver
           wget -O /usr/local/bin/semver \
           https://raw.githubusercontent.com/fsaintjacques/semver-tool/master/src/semver
-
-          # Make script executable
           chmod +x /usr/local/bin/semver
 
-          # Prove it works
-          semver --version
+          # Set up environment
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            echo "::set-output name=BUMP_LEVEL::minor"
+          elif [ "${{ github.ref }}" = "refs/heads/dev" ]; then
+            echo "::set-output name=BUMP_LEVEL::patch"
+          else
+             echo "::set-output name=BUMP_LEVEL::release"
+          fi         
       - name: "Get previous tag"
         id: get-previous-tag
         run: |
@@ -30,6 +36,6 @@ jobs:
       - name: "Bump tag"
         id: bump-tag
         run: |
-          echo "::set-output name=NEW_TAG::$(semver bump minor ${{ steps.get-previous-tag.outputs.TAG }})"
+          echo "::set-output name=NEW_TAG::$(semver bump ${{ steps.set-up-env.outputs.BUMP_LEVEL }} ${{ steps.get-previous-tag.outputs.TAG }})"
       - name: "Output preivious tag"
         run: echo "Updating tag ${{ steps.get-previous-tag.outputs.TAG }} -> ${{ steps.bump-tag.outputs.NEW_TAG }}"
