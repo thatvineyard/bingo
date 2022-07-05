@@ -7,6 +7,7 @@ on:
 jobs:
   bump-tag:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
       - uses: actions/checkout@v3
@@ -15,13 +16,17 @@ jobs:
       - name: Set up environment (prod)
         if: ${{ github.ref_name == 'main' }}
         run: |
+          echo "TARGET_ENV=prod" >> $GITHUB_ENV
+          echo "TARGET_ENV_FOLDER=/opt/bingo/" >> $GITHUB_ENV
           echo "BUMP_LEVEL=minor" >> $GITHUB_ENV
           echo "SSH_USER_SECRET=PROD_SSH_USER" >> $GITHUB_ENV
           echo "SSH_HOST_SECRET=PROD_SSH_HOST" >> $GITHUB_ENV
           echo "SSH_KEY_SECRET=PROD_SSH_KEY" >> $GITHUB_ENV
-      - name: Set up environment (dev)
+      - name: Set up environment (test)
         if: ${{ github.ref_name == 'dev' }}
         run: |
+          echo "TARGET_ENV=test" >> $GITHUB_ENV
+          echo "TARGET_ENV_FOLDER=/opt/bingo-test/" >> $GITHUB_ENV
           echo "BUMP_LEVEL=patch" >> $GITHUB_ENV
           echo "SSH_USER_SECRET=TEST_SSH_USER" >> $GITHUB_ENV
           echo "SSH_HOST_SECRET=TEST_SSH_HOST" >> $GITHUB_ENV
@@ -35,3 +40,35 @@ jobs:
           release_branches: main,dev
       - name: Deploy (mock)
         run: echo ${{ secrets[env.SSH_USER_SECRET] }} ${{ secrets[env.SSH_HOST_SECRET]}}
+      - name: Configure SSH
+        run: |
+          mkdir -p ~/.ssh/
+          echo "${SSH_KEY}" > ~/.ssh/${TARGET_ENV}.key
+          chmod 600 ~/.ssh/${TARGET_ENV}.key
+          cat >>~/.ssh/config <<END
+          Host ${TARGET_ENV}
+            HostName ${SSH_HOST}
+            User ${SSH_USER}
+            IdentityFile ~/.ssh/${TARGET_ENV}.key
+            StrictHostKeyChecking no
+          END
+        env:
+          TARGET_ENV: ${env.TARGET_ENV}
+          SSH_USER: ${{ secrets[env.SSH_USER_SECRET] }}
+          SSH_HOST: ${{ secrets[env.SSH_HOST_SECRET] }}
+          SSH_KEY: ${{ secrets[env.SSH_KEY_SECRET] }}
+      - name: Pull code (SSH)
+        run: ssh ${TARGET_ENV} "cd ${TARGET_ENV_FOLDER}; git pull;"
+        env:
+          TARGET_ENV: ${env.TARGET_ENV}       
+          TARGET_ENV_FOLDER: ${env.TARGET_ENV_FOLDER}       
+      - name: Build Docker Compose (SSH)
+        run: ssh ${TARGET_ENV} "cd ${TARGET_ENV_FOLDER}; docker-compose -f docker-compose.yml build"
+        env:
+          TARGET_ENV: ${env.TARGET_ENV}
+          TARGET_ENV_FOLDER: ${env.TARGET_ENV_FOLDER}       
+      - name: Start Docker Compose (SSH)
+        run: ssh ${TARGET_ENV} "cd ${TARGET_ENV_FOLDER}; docker-compose -f docker-compose.yml up -d"
+        env:
+          TARGET_ENV: ${env.TARGET_ENV}    
+          TARGET_ENV_FOLDER: ${env.TARGET_ENV_FOLDER}       
