@@ -11,7 +11,7 @@ endif
 
 # Calc verison
 GIT_TAG := $(shell git describe --tags --abbrev=0)
-GIT_REF := $(shell git log -1 --pretty=format:"%%h" --abbrev=0)
+GIT_REF := $(shell git log -1 --pretty=format:'%h' --abbrev=0)
 ifeq (${GIT_REF},)
 BUILD_VERSION := ${GIT_TAG}
 else
