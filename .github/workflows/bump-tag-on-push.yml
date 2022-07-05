@@ -24,6 +24,8 @@ jobs:
           semver --version
       - name: "Get previous tag"
         id: get-previous-tag
-        run: echo "::set-output name=TAG::$(git describe --tags --abbrev=0)"
+        run: |
+          echo "$(git describe --tags --abbrev=0)"
+          echo "::set-output name=TAG::$(git describe --tags --abbrev=0)"
       - name: "Print preivious tag"
         run: echo "Prev tag ${{ steps.get-previous-tag.TAG }}"
