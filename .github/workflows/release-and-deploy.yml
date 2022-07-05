@@ -38,3 +38,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           default_bump: ${{ steps.set-up-env.outputs.BUMP_LEVEL }}
           release_branches: main,dev
+      - name: Deploy (mock)
+        run: echo ${{ steps.set-up-env.outputs.SSH_USER }} ${{ steps.set-up-env.outputs.SSH_HOST }}
