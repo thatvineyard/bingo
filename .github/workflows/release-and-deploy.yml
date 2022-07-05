@@ -5,7 +5,7 @@ on:
     branches: [main, dev]
 
 jobs:
-  bump-tag:
+  bump-tag-and-deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
