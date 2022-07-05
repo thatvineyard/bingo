@@ -5,7 +5,7 @@ services:
       context: .
       target: builder
       args:
-        - ENV_BUILD=.envbuild.test
+        - ENV_BUILD=.envbuild.dev
     volumes:
       - ./${FRONTEND_FOLDER}/src/:/app/src/
       - ./${FRONTEND_FOLDER}/public/:/app/public/
