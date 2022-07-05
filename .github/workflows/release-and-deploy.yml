@@ -16,30 +16,16 @@ jobs:
         if: ${{ github.ref_name == 'main' }}
         run: |
           echo "BUMP_LEVEL=minor" >> $GITHUB_ENV
-          echo "SSH_USER=${{ secrets.PROD_SSH_USER }}" >> $GITHUB_ENV
-          echo "SSH_HOST=${{ secrets.PROD_SSH_HOST }}" >> $GITHUB_ENV
-          echo "SSH_KEY=${{ secrets.PROD_SSH_KEY }}" >> $GITHUB_ENV
+          echo "SSH_USER_SECRET=PROD_SSH_USER" >> $GITHUB_ENV
+          echo "SSH_HOST_SECRET=PROD_SSH_HOST" >> $GITHUB_ENV
+          echo "SSH_KEY_SECRET=PROD_SSH_KEY" >> $GITHUB_ENV
       - name: Set up environment (dev)
         if: ${{ github.ref_name == 'dev' }}
         run: |
           echo "BUMP_LEVEL=patch" >> $GITHUB_ENV
-          echo "SSH_USER=${{ secrets.TEST_SSH_USER }}" >> $GITHUB_ENV
-          echo "SSH_HOST=${{ secrets.TEST_SSH_HOST }}" >> $GITHUB_ENV
-      # - name: "Set up environment"
-      #   id: set-up-env
-      #   run: |
-      #     # Set up environment
-      #     if [[ "${{ github.ref_name }}" = "main" ]]; then
-      #       # echo "::set-output name=BUMP_LEVEL::minor"
-      #       # echo "::set-output name=SSH_USER::${{ secrets.PROD_SSH_USER }}
-      #       # echo "::set-output name=SSH_HOST::${{ secrets.PROD_SSH_HOST }}
-      #       # echo "::set-output name=SSH_KEY::${{ secrets.PROD_SSH_KEY }}
-      #     elif [[ "${{ github.ref_name }}" = "dev" ]]; then
-      #       echo "::set-output name=BUMP_LEVEL::patch"
-      #       echo "::set-output name=SSH_USER::${{ secrets.TEST_SSH_USER }}
-      #       echo "::set-output name=SSH_HOST::${{ secrets.TEST_SSH_HOST }}
-      #       echo "::set-output name=SSH_KEY::${{ secrets.TEST_SSH_KEY }}
-      #     fi         
+          echo "SSH_USER_SECRET=TEST_SSH_USER" >> $GITHUB_ENV
+          echo "SSH_HOST_SECRET=TEST_SSH_HOST" >> $GITHUB_ENV
+          echo "SSH_KEY_SECRET=TEST_SSH_KEY" >> $GITHUB_ENV
       - name: Bump version and push tag
         id: tag_version
         uses: mathieudutour/github-tag-action@v6.0
@@ -48,4 +34,4 @@ jobs:
           default_bump: ${{ env.BUMP_LEVEL }}
           release_branches: main,dev
       - name: Deploy (mock)
-        run: echo ${{ env.SSH_USER }} ${{ env.SSH_HOST }}
+        run: echo ${{ secrets[${env.SSH_USER_SECRET}] }} ${{ secrets[${env.SSH_HOST_SECRET} }}
