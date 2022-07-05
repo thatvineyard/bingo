@@ -59,7 +59,7 @@ function App() {
       return boardList;
     }
 
-    return boardList.filter(e => e.name.includes(searchString))
+    return boardList.filter(e => e.name.toLowerCase().includes(searchString.toLowerCase()))
   }
 
   const handleChange = (event) => {
