@@ -26,9 +26,6 @@ jobs:
             echo "::set-output name=SSH_USER::${{ secrets.TEST_SSH_USER }}
             echo "::set-output name=SSH_HOST::${{ secrets.TEST_SSH_HOST }}
             echo "::set-output name=SSH_KEY::${{ secrets.TEST_SSH_KEY }}
-          else
-            echo "Unexpected branch"
-            exit 1
           fi         
       - name: Bump version and push tag
         id: tag_version
