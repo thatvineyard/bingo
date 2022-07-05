@@ -32,4 +32,4 @@ jobs:
         run: |
           echo "::set-output name=NEW_TAG::$(semver bump minor ${{ steps.get-previous-tag.outputs.TAG }})"
       - name: "Output preivious tag"
-        run: echo "Updating tag ${{ steps.get-previous-tag.outputs.TAG }} -> ${{ steps.get-previous-tag.outputs.NEW_TAG }}"
+        run: echo "Updating tag ${{ steps.get-previous-tag.outputs.TAG }} -> ${{ steps.bump-tag.outputs.NEW_TAG }}"
