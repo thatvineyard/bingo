@@ -17,11 +17,19 @@ jobs:
         run: |
           # Set up environment
           if [ "${{ github.ref }}" = "refs/heads/main" ]; then
-            echo "BUMP_LEVEL=minor" >> "$GITHUB_ENV"
+            echo "::set-output name=BUMP_LEVEL::minor"
+            echo "::set-output name=SSH_USER::${{ secrets.PROD_SSH_USER }}
+            echo "::set-output name=SSH_HOST::${{ secrets.PROD_SSH_HOST }}
+            echo "::set-output name=SSH_KEY::${{ secrets.PROD_SSH_KEY }}
+
           elif [ "${{ github.ref }}" = "refs/heads/dev" ]; then
-            echo "BUMP_LEVEL=patch" >> "$GITHUB_ENV"
+            echo "::set-output name=BUMP_LEVEL::patch"
+            echo "::set-output name=SSH_USER::${{ secrets.TEST_SSH_USER }}
+            echo "::set-output name=SSH_HOST::${{ secrets.TEST_SSH_HOST }}
+            echo "::set-output name=SSH_KEY::${{ secrets.TEST_SSH_KEY }}
           else
-            echo "BUMP_LEVEL=false" >> "$GITHUB_ENV"
+             echo "Unexpected branch"
+             exit 1
           fi         
       - name: Bump version and push tag
         id: tag_version
