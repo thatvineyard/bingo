@@ -27,5 +27,9 @@ jobs:
         run: |
           echo "$(git describe --tags --abbrev=0)"
           echo "::set-output name=TAG::$(git describe --tags --abbrev=0)"
-      - name: "Print preivious tag"
-        run: echo "Prev tag ${{ steps.get-previous-tag.TAG }}"
+      - name: "Bump tag"
+        id: bump-tag
+        run: |
+          echo "::set-output name=NEW_TAG::$(semver bump minor ${{ steps.get-previous-tag.outputs.TAG }})"
+      - name: "Output preivious tag"
+        run: echo "Updating tag ${{ steps.get-previous-tag.outputs.TAG }} -> ${{ steps.get-previous-tag.outputs.NEW_TAG }}"
