@@ -45,7 +45,7 @@ function BingoLineOverlay(props) {
           }
         } else if (props.columns > props.rows) {
           if (dimension === "X") {
-            return -(winningOffset - 0.5) / props.columns
+            return (winningOffset - 0.5) / props.columns
           } else {
             return 0;
           }
