@@ -4,24 +4,16 @@ services:
     build:
       context: .
       target: builder
+      args:
+        - ENV_BUILD=.envbuild.dev
     volumes:
       - ./${FRONTEND_FOLDER}/src/:/app/src/
+      - ./${FRONTEND_FOLDER}/public/:/app/public/
     ports:
       - ${FRONTEND_PORT_HOST}:${FRONTEND_PORT_CONTAINER}
     env_file:
       - .env.dev
     command: ["bash", "-c", "npm start"]
-
-  bingo-tester:
-    build:
-      context: .
-      target: tester
-    volumes:
-      - ./${FRONTEND_FOLDER}/src/:/app/src/
-    environment:
-      - WATCHPACK_POLLING
-    env_file:
-      - .env.dev
 
 # Command to run with this override:
 # docker-compose -f .\docker-compose.yml -f .\docker-compose.dev.yml --env-file=.env.dev build; docker-compose -f .\docker-compose.yml -f .\docker-compose.dev.yml --env-file=.env.dev up -d; docker-compose logs -f

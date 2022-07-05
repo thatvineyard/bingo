@@ -9,7 +9,7 @@
   --col-bg-ter: #8190ac;
   --col-fg-pri: #d9dde4;
   --col-fg-sec: #7d8ca5; 
-  --col-fg-ter: #4e5158;
+  --col-fg-ter: #6b727e;
 
   color: var(--col-fg-pri);
   background-color: var(--col-bg-pri);
@@ -61,4 +61,18 @@
   background-color: var(--col-bg-ter);
   border-color: var(--col-fg-pri);
   outline: none;
+}
+
+.App .appDetails {
+  color: var(--col-fg-ter);
+  font-size: 10px;
+  position: relative;
+  bottom: 0;
+  right: 0;
+  padding-inline: inherit;
+  padding-block: 10px;
+}
+
+.App .appDetails p {
+  margin-block: 0px;
 }

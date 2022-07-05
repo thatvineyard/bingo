@@ -26,6 +26,20 @@
   margin: 0;
 }
 
+.drawer .footer {
+  /* || Dimensions */
+  width: 100%;
+  height: 30px;
+  /* || Positioning */
+  /* position: absolute;
+  top: 0px;
+  left: 0px; */
+  /* || Design */
+  /* || Content */
+  /* || Utility */
+}
+
+
 .drawer .content {
   /* || Dimensions */
   width: calc(100% - 20px);
@@ -34,11 +48,13 @@
   inset: 0px;
   padding-top: 10px;
   padding-left: 20px;
-  padding-right: 10px;
+  padding-right: 20px;
   bottom: 0;
-  /* Design */
+  /* || Design */
   text-align: left;
-  /* Content */
+  /* || Content */
+  overflow-y: scroll;
+  /* || Utility */
 }
 
 .drawer .content.static {

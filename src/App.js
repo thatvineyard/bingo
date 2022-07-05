@@ -38,7 +38,7 @@ function App() {
     useEffect(() => {
       setBoardList(() => {
         return boards.map(element => {
-          let result = {...element}
+          let result = { ...element }
           delete result.element
           return result;
         })
@@ -59,7 +59,7 @@ function App() {
       return boardList;
     }
 
-    return boardList.filter(e => e.name.includes(searchString))
+    return boardList.filter(e => e.name.toLowerCase().includes(searchString.toLowerCase()))
   }
 
   const handleChange = (event) => {
@@ -91,6 +91,10 @@ function App() {
             iconGap={0}
             iconColor={"var(--col-fg-pri)"}
           />
+          <div className='appDetails'>
+            <p>Build version: {process.env.REACT_APP_BUILD_VERSION || "X.Y.Z-REF"}</p>
+            <p>Build env: {process.env.REACT_APP_BUILD_ENV || "env"}</p>
+          </div>
         </CollapsableDrawer>
       </nav>
       <div id="title">

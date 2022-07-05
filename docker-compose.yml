@@ -7,6 +7,7 @@ services:
       - WATCHPACK_POLLING
     networks:
       - bingo-net
+    hostname: bingo
     expose:
       - ${FRONTEND_PORT_CONTAINER}
     ports:
@@ -17,4 +18,4 @@ networks:
     driver: bridge
 
 # Command to run:
-# docker-compose build; docker-compose up -d; docker-compose logs -f
+# docker-compose -f docker-compose.yml build; docker-compose -f docker-compose.yml up -d; docker-compose logs -f

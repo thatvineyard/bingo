@@ -1,0 +1,21 @@
+version: '3.0'
+services:
+  bingo:
+    build:
+      context: .
+      args:
+        - ENV_BUILD=.envbuild.test
+    networks:
+      - bingotest-net
+    hostname: bingo-test
+    expose:
+      - ${FRONTEND_PORT_CONTAINER}
+    ports:
+      - ${FRONTEND_PORT_HOST}:${FRONTEND_PORT_CONTAINER}
+
+networks:
+  bingotest-net:
+    driver: bridge
+
+# Command to run:
+# docker-compose -f .\docker-compose.yml -f .\docker-compose.test.yml build; docker-compose -f .\docker-compose.yml -f .\docker-compose.test.yml up -d; docker-compose logs -f
