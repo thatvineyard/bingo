@@ -19,7 +19,7 @@ function BingoLineOverlay(props) {
       case "diagonalForward":
         if (props.rows > props.columns) {
           if (dimension === "Y") {
-            return (winningOffset - 0.5) / props.rows
+            return (winningOffset - 1) / props.rows
           } else {
             return 0;
           }
@@ -39,7 +39,7 @@ function BingoLineOverlay(props) {
       case "diagonalBackward":
         if (props.rows > props.columns) {
           if (dimension === "Y") {
-            return (winningOffset - 0.5) / props.rows
+            return (winningOffset - 1) / props.rows
           } else {
             return 0;
           }
