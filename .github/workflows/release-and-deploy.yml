@@ -16,12 +16,11 @@ jobs:
         id: set-up-env
         run: |
           # Set up environment
-          elif [[ "${{ github.ref_name }}" == "main" ]]; then
+          if [[ "${{ github.ref_name }}" == "main" ]]; then
             echo "::set-output name=BUMP_LEVEL::minor"
             echo "::set-output name=SSH_USER::${{ secrets.PROD_SSH_USER }}
             echo "::set-output name=SSH_HOST::${{ secrets.PROD_SSH_HOST }}
             echo "::set-output name=SSH_KEY::${{ secrets.PROD_SSH_KEY }}
-
           elif [[ "${{ github.ref_name }}" == "dev" ]]; then
             echo "::set-output name=BUMP_LEVEL::patch"
             echo "::set-output name=SSH_USER::${{ secrets.TEST_SSH_USER }}
