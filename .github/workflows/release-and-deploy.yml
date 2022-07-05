@@ -63,12 +63,12 @@ jobs:
           TARGET_ENV: ${{ env.TARGET_ENV }}
           TARGET_ENV_FOLDER: ${{ env.TARGET_ENV_FOLDER }}       
       - name: Build Docker Compose (SSH)
-        run: ssh ${TARGET_ENV} "cd ${TARGET_ENV_FOLDER}; docker-compose -f docker-compose.yml build"
+        run: ssh ${TARGET_ENV} "cd ${TARGET_ENV_FOLDER}; make build ENV=${TARGET_ENV}"
         env:
           TARGET_ENV: ${{ env.TARGET_ENV }}
           TARGET_ENV_FOLDER: ${{ env.TARGET_ENV_FOLDER }}       
       - name: Start Docker Compose (SSH)
-        run: ssh ${TARGET_ENV} "cd ${TARGET_ENV_FOLDER}; docker-compose -f docker-compose.yml up -d"
+        run: ssh ${TARGET_ENV} "cd ${TARGET_ENV_FOLDER}; make start ENV=${TARGET_ENV}"
         env:
           TARGET_ENV: ${{ env.TARGET_ENV }}
           TARGET_ENV_FOLDER: ${{ env.TARGET_ENV_FOLDER }}       
