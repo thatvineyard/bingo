@@ -99,7 +99,7 @@ function App() {
       </nav>
       <div id="title">
         <header>
-          BINGO
+          HERRM'BINGO
         </header>
         <BingoLineOverlay
           completeLines={[{ direction: "row", index: 0 }]}
